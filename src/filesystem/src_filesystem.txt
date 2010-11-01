@@ -1,0 +1,5 @@
+C:\Projects\spase\java\registry\src\filesystem\Downloader.java
+C:\Projects\spase\java\registry\src\filesystem\Render.java
+C:\Projects\spase\java\registry\src\filesystem\Resolver.java
+C:\Projects\spase\java\registry\src\filesystem\SimpleReg.java
+C:\Projects\spase\java\registry\src\filesystem\Status.java

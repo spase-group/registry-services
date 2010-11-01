@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+	<settings>
+		<label>client</label>
+		<root_path>\</root_path>
+		<output_path>..\..\build\classes\</output_path>
+		<source_path>\</source_path>
+		<jdkprofile_ref>java</jdkprofile_ref>
+		<compiler_ref>&lt;Default&gt;</compiler_ref>
+		<ant_ref/>
+	</settings>
+	<ant_events/>
+	<run_items>
+		<item run="org.spase.registry.Search"/>
+		<item run="org.spase.registry.client.Search"/>
+	</run_items>
+	<runtimes>
+		<runtime>
+			<label>&lt;Default&gt;</label>
+			<application_ref/>
+			<applet_ref/>
+			<debugger_ref/>
+			<param/>
+			<run>org.spase.registry.Search</run>
+		</runtime>
+	</runtimes>
+	<libraries/>
+	<files>
+		<include>
+			<fileitem>
+				<path>Search.java</path>
+			</fileitem>
+		</include>
+	</files>
+	<tasks/>
+</project>

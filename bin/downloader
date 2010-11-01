@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# Bourne Shell script that allows easy execution of a tool
+# without the need to set the CLASSAPTH, placing JAR in extension directory
+# or having to type in that long java command (java spase.tool ...)
+#
+# Version: $Id: collator 2 2009-03-05 16:57:37Z tking $
+
+THIS_DIR=`dirname $0`
+
+# Executes tool
+# Arguments are passed in to the tool via '$@'
+
+java -Djava.ext.dirs=${THIS_DIR}/jar org.spase.registry.server.Downloader "$@"

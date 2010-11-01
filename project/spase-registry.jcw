@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace>
+	<settings>
+		<label>Spase-Registry</label>
+	</settings>
+	<users>
+		<user>
+			<path>spase-registry.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>..\src\filesystem\filesystem.jcp</path>
+		</project>
+		<project>
+			<path>..\src\client\client.jcp</path>
+		</project>
+		<project>
+			<path>..\src\tools\tools.jcp</path>
+		</project>
+	</projects>
+</workspace>
