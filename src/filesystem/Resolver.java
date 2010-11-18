@@ -616,8 +616,9 @@ public class Resolver extends SmartHttpServlet
 			for(String item : ackList) mOut.println("<Acknowledgement>" + item + "</Acknowledgement>");
 			
 			if(sendDesc) getDescription(id, true, processed);
-			
+
 			long bytes = 0;
+			long totalBytes = 0;			
 			ArrayList<ArrayList<String>> granules = new ArrayList<ArrayList<String>>();
 			ArrayList<String> matches = new ArrayList<String>();
 			scanDeepPath(path, matches);
@@ -646,6 +647,7 @@ public class Resolver extends SmartHttpServlet
 
 			 		// Calculate total size
 			 		bytes = 0;
+			 		// Prior to version 1.3.0 DataExtent used Bytes for quantity
 			 		values = XMLGrep.getValues(docIndex, ".*/DataExtent/Bytes");
 					for(String value : values) {
 						try {
@@ -654,6 +656,17 @@ public class Resolver extends SmartHttpServlet
 							// Value is not in properly format - ignore.
 						}
 					}
+					// Since version 1.3.0 DataExtent is expressed as a Quantity with units (for now assume bytes)
+			 		values = XMLGrep.getValues(docIndex, ".*/DataExtent/Quantity");
+					for(String value : values) {
+						try {
+							bytes += (long) Double.parseDouble(value);
+						} catch(Exception e) {
+							// Value is not in properly format - ignore.
+						}
+					}
+					
+					totalBytes += bytes;
 					// Add record that consists of: StartDate, StopDate, PathName, URL, Bytes
 					ArrayList<String> record = new ArrayList<String>();
 					record.add(gStartDate);
@@ -669,18 +682,20 @@ public class Resolver extends SmartHttpServlet
 			Collections.sort(granules, new StringListComparator(0, StringListComparator.SortAscending));
 			
 			// Write sorted list
+			if(sendSize) mOut.println("<Size>" + igpp.util.Text.toUnitizedBytes(totalBytes) + "</Size>");
 			for(ArrayList<String> item : granules) {
 				if( sendSize || sendURL) {
 					if(sendURL) {
 				 		String[]	values = item.get(3).split("\n");
 						for(String value : values) mOut.println("   <URL>" + value + "</URL>");
 					}
-					if(sendSize) mOut.println("<Size>" + item.get(4) + "</Size>");
+					// if(sendSize) mOut.println("<Size>" + item.get(4) + "</Size>");
 				} else {	// Send entire Granule description
 					streamContent(item.get(2));
 				}
 			}
 		}
+			long totalBytes = 0;			
 		mOut.println("</Response>");
 	}
 	
