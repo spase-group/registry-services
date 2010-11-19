@@ -461,13 +461,25 @@ public class Status extends SmartHttpServlet
 		}
 		
 		// Sort list and send details is requested
-		Collections.sort(slist);	
+		Collections.sort(slist);
+		
+		// Remove duplicates
+		ArrayList<String> ulist = new ArrayList<String>();
+		String	lastItem = "";
+		for(String item : slist) {
+			if(item.compareTo(lastItem) != 0) {	// Unique item
+				ulist.add(item);
+				lastItem = item;
+			}
+		}
+		
+		// Output unique list
 		int newCount = 0;
 		int modifiedCount = 0;
 		int deleteCount = 0;
 		
 		String category = "";
-		for(String item : slist) {
+		for(String item : ulist) {
 			String[] part = item.split("[ \t]");
 			
 			type = "New";
