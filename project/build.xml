@@ -63,6 +63,7 @@
     
     <property name="classes.dir"  value="${build.dir}/classes"/>
     <property name="jar.dir"      value="${build.dir}/jar"/>
+    <property name="war.dir"      value="${build.dir}/war"/>
     <property name="api.dir"      value="${build.dir}/api"/>
     <property name="kit.dir"      value="${build.dir}/kit"/>
     <property name="bin-kit.dir"  value="${build.dir}/bin"/>
@@ -83,6 +84,7 @@
        <echo message="   clean: Remove all temporary files."/>
        <echo message="   compile: Generate byte codes from source. Places results in ${classes.dir}"/>
        <echo message="   jar: Compile source and create jar file. Depends on: compile"/>
+       <echo message="   war: Compile source and create war file. Depends on: compile"/>
        <echo message="   bin: Build command-line utilities."/>
        <echo message="   kit: Build a distribution kit which contains everything."/>
        <echo message="   api: Create the API documentation."/>
@@ -120,6 +122,20 @@
                 <attribute name="Implementation-Version" value="${version}"/>
             </manifest>
         </jar>
+    </target>
+
+    <!-- Create jar file for classes -->
+    <target name="war" depends="jar">
+        <mkdir dir="${war.dir}"/>
+        <war destfile="${war.dir}/${package.name}-${version}.war" webxml="html/WEB-INF/web.xml">
+           <fileset dir="html"/>
+           <lib dir="lib"></lib>
+           <lib dir="build/jar"></lib>
+           	<!-- To include other files
+           <zipfileset dir="src/graphics/images/gifs"
+                       prefix="images"/>
+           -->
+        </war>
     </target>
 
    <!-- Check if "bin" directory exists and set property for the "bin" target -->

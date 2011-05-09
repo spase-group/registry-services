@@ -309,7 +309,7 @@ public class Profiler
 				endAt = igpp.xml.XMLGrep.findLastElement(docIndex, "/Spase/" + tagName + "/.*", startAt);
 				profile = makeResourceProfile(docIndex, version, tagName, startAt, endAt);
 				if(profile != null) {	// Valid - add it
-					setInstrumentInfo(profile);	// Must preceed setObservatoryInfo()
+					setInstrumentInfo(profile);	// Must preceed calling setObservatoryInfo()
 					setObservatoryInfo(profile);
 					profile.setAuthorityFromResourceID();
 					profile.setRegistryID(mRegistryID);
@@ -361,9 +361,7 @@ public class Profiler
 		
 		if(profile.getInstrumentID().length() == 0) return;
 		
-		String part[] = profile.getInstrumentID().split("://", 2);	// Split URN. It should start with "spase:".
-		// descURL += part[1] + ".xml";	// Path portion;
-		descURL += "?id=" + part[1];
+		descURL += "?id=" + profile.getInstrumentID();
 
 		try {
 			doc = igpp.xml.XMLGrep.parse(descURL);	// Load and parse file.
@@ -378,7 +376,36 @@ public class Profiler
 		profile.setObservatoryID(igpp.xml.XMLGrep.getFirstValue(segment, "/Spase/Instrument/ObservatoryID", ""));
 		profile.addWords(igpp.xml.XMLGrep.getWords(segment));
 	}
-	
+
+	/**
+	 * Get the ResourceName in a resource description.
+    *
+    * @param resourceID the ResourceID of the resource.
+    *
+	 * @since           1.0
+    **/
+	public String getResourceName(String resourceID)
+		throws Exception
+	{
+		Document	doc;
+		ArrayList<Pair> segment = null;
+		String descURL = mLookup;	// Path to common info (Instrument/Observatory)
+		
+		if(resourceID == null) return "";
+		if(resourceID.length() == 0) return "";
+		
+		descURL += "?id=" + resourceID;
+		
+		try {
+			doc = igpp.xml.XMLGrep.parse(descURL);	// Load and parse file.
+			segment = igpp.xml.XMLGrep.makeIndex(doc, "");
+			return igpp.xml.XMLGrep.getFirstValue(segment, "/Spase/.*/ResourceHeader/ResourceName", "");
+		} catch(Exception e) {
+			System.out.println("Unable to locate: " + descURL);
+			return "";
+		}
+	}
+		
 	/**
 	 * Set the observatory information from the observatory ID
     *
@@ -395,9 +422,9 @@ public class Profiler
 		
 		if(profile.getObservatoryID().length() == 0) return;
 		
-		String part[] = profile.getObservatoryID().split("://", 2);	// Split URN. It should start with "spase:".
-		// descURL += part[1] + ".xml";	// Path portion;
-		descURL += "?id=" + part[1];
+		// String part[] = profile.getObservatoryID().split("://", 2);	// Split URN. It should start with "spase:".
+		// descURL += "?id=" + part[1];
+		descURL += "?id=" + profile.getObservatoryID();
 		
 		try {
 			doc = igpp.xml.XMLGrep.parse(descURL);	// Load and parse file.
@@ -407,7 +434,19 @@ public class Profiler
 			return;
 		}
 		
-		profile.setObservatoryGroup(igpp.xml.XMLGrep.getValues(segment, "/Spase/Observatory/ObservatoryGroup"));
+		// In Version 2.2.0 of the data model ObservatoryGroup was replaced with ObservatoryGroupID
+		String group = igpp.xml.XMLGrep.getFirstValue(segment, "/Spase/Observatory/ObservatoryGroup", null);
+		ArrayList<String> nameList = new ArrayList<String>();
+		if(group == null) {	// Determine ObservatoryGroupID and extract resource name
+			ArrayList<String> idList = new ArrayList<String>();
+			idList.addAll(igpp.xml.XMLGrep.getValues(segment, "/Spase/Observatory/ObservatoryGroupID"));
+			for(String id : idList) {
+				nameList.add(getResourceName(id));
+			}
+		} else {	// Use values of ObservatoryGroup
+			nameList.addAll(igpp.xml.XMLGrep.getValues(segment, "/Spase/Observatory/ObservatoryGroup"));
+		}
+		profile.setObservatoryGroup(nameList);
 		profile.setObservatoryName(igpp.xml.XMLGrep.getValues(segment, "/Spase/Observatory/ResourceHeader/ResourceName"));
 		
 		profile.setObservatoryType("Spacecraft");	// If Region is not specified assume to be spacecraft
@@ -500,6 +539,9 @@ public class Profiler
 		
 		// Words
 		profile.setWords(igpp.xml.XMLGrep.getWords(segment));
+		
+		// Keywords
+		profile.setKeywords(igpp.xml.XMLGrep.getValues(segment, "/Spase/.*/Keyword"));
 		
 		// Associations
 		String[] idTags = new String[] {"InputResource", "Instrument", "Observatory", "Parent", "Prior", "Repository", "Registry"};

@@ -1,0 +1,20 @@
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.spase-group.org/data/schema">
+<Version>1.3.0</Version>
+<Granule>
+  <ResourceID>spase://Example/Granule/Geotail/CPI/HPA_PT64S/ge_HPAmom_cpi_20040122_v01</ResourceID>
+  <ReleaseDate>2008-12-11T16:47:24Z</ReleaseDate>
+  <ParentID>spase://Example/NumericalData/Geotail/CPI/HPA_PT64S</ParentID>
+  <URL>http://erebus.physics.uiowa.edu/cpi-data/hp/2004/ge_HPAmom_cpi_20040122_v01.cdf</URL>
+  <StartDate>2004-01-22T00:00:16Z</StartDate>
+  <StopDate>2004-01-22T23:59:11Z</StopDate>
+  <Checksum>
+    <HashValue>471255a4fc3cb320ac5ffbb3b091be2d</HashValue>
+    <HashFunction>MD5</HashFunction>
+  </Checksum>
+  <DataExtent>
+    <Quantity>67663</Quantity>
+    <Units>Bytes</Units>
+  </DataExtent>
+</Granule>
+</Spase>

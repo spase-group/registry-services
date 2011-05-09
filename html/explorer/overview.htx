@@ -1,0 +1,49 @@
+<html>
+<head>
+</head>
+</body>
+<div class="col-left">
+	<h2>Welcome to the SPASE Registry Explorer.</h2>
+	<p>
+The registry explorer provides a structured view of the contents of a SPASE registry.
+The organization of the registry is presented as a hiearchical tree. 
+Clicking on any item in the tree will display the full definition for the item.
+</div>
+
+<!-- Right-hand guides -->
+    <div class="col-right">
+        <div class="res-block">
+            <div class="res-block-inner">
+        	<center><b>SPASE Items</b><br>(at <a href="http://www.spase-group.org">www.spase-group.org</a>)</center>
+        	</div>
+            <div class="res-block-inner">
+                <h3>References</h3>
+                <ul>
+                    <li><a href="http://www.spase-group.org/data/search.jsp" target="_blank">Data Dictionary Lookup</a></li>
+                    <li><a href="http://www.spase-group.org/data/explorer" target="_blank">Data Model Explorer</a></li>
+                    <li><a href="http://www.spase-group.org/data/schema/" target="_blank">Data Model Schema</a></li>
+                    <li><a href="http://www.spase-group.org/data/doc" target="_blank">Data Model Reference Manuals</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="res-block">
+            <div class="res-block-inner">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="http://www.spase-group.org/tools/validate" target="_blank">Validator (XML)</a></li>
+                    <li><a href="http://www.spase-group.org/tools/editor" target="_blank">Editor (XML)</a></li>
+                    <li><a href="http://www.spase-group.org/tools/stylesheet/dictionary-example.jsp" target="_blank">Dictionary Lookup</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="res-block">
+            <div class="res-block-inner">
+                <h3>Icon Legend</h3>
+                <ul id="legend" style="list-style:none;margin-left:0;">
+		            <li><img src="images/s.gif" class="item-icon folder">Context</li>
+		            <li><img src="images/s.gif" class="item-icon leaf">Resource</li>
+		        </ul>
+            </div>
+        </div>
+</body>
+</html>

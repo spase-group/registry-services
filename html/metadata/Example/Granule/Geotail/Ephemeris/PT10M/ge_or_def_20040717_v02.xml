@@ -1,0 +1,20 @@
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.spase-group.org/data/schema">
+<Version>1.3.0</Version>
+<Granule>
+  <ResourceID>spase://Example/Granule/Geotail/Ephemeris/PT10M/ge_or_def_20040717_v02</ResourceID>
+  <ReleaseDate>2008-12-05T14:51:45Z</ReleaseDate>
+  <ParentID>spase://Example/NumericalData/Geotail/Ephemeris/PT10M</ParentID>
+  <URL>ftp://cdaweb.gsfc.nasa.gov/pub/istp/geotail/def_or/2004/ge_or_def_20040717_v02.cdf</URL>
+  <StartDate>2004-07-17T00:00:00Z</StartDate>
+  <StopDate>2004-07-17T23:50:00Z</StopDate>
+  <Checksum>
+    <HashValue>f7f65865fcdc2dd9184e6f6b81b27ec7</HashValue>
+    <HashFunction>MD5</HashFunction>
+  </Checksum>
+  <DataExtent>
+    <Quantity>77824</Quantity>
+    <Units>Bytes</Units>
+  </DataExtent>
+</Granule>
+</Spase>

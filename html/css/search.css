@@ -1,0 +1,63 @@
+html, body, p, div, table, tr, td, th {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+   font-size: 100%;
+   vertical-align: baseline;
+   background: transparent;
+}
+
+body {
+    background-color: #e9f0f5;/*#277bc0;/*#d3d3f9; */
+    color: black;
+    font-family: Verdana, Arial, sans-serif; 
+    font-size:10px; 
+    line-height: 1.2;
+    padding: 10px 3% 10px 3%;
+}
+
+
+p {
+    margin-bottom: 0.75ex;
+}
+
+div.info {
+	float:right;
+}
+
+a:link,
+a:visited {
+   color: #277bc0;/* #339;*/
+   font-weight:bolder; 
+   text-decoration:none; 
+}
+
+a:hover {
+   color: blue;
+   font-weight:bolder; 
+   text-decoration:underline; 
+}
+
+table {
+   border: thin solid #666;
+   margin-top: 5px;
+   margin-bottom: 10px;
+   border-collapse: collapse;
+   border-spacing: 0;
+}
+
+thead,tbody {
+   border: thin solid #666;
+}
+
+td, th {
+   margin: 0;
+   padding: 2px 2px 2px 2px;
+}
+
+th {
+    font-style: oblique;
+}
+
+

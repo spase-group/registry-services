@@ -2,11 +2,11 @@
 
 <workspace_user>
 	<active_project>
-		<label>filesystem</label>
+		<label>tools</label>
 	</active_project>
 	<projects>
 		<project>
-			<label>filesystem</label>
+			<label>tools</label>
 			<showfiles>false</showfiles>
 		</project>
 		<project>
@@ -14,70 +14,46 @@
 			<showfiles>false</showfiles>
 		</project>
 		<project>
-			<label>tools</label>
+			<label>filesystem</label>
 			<showfiles>false</showfiles>
 		</project>
 	</projects>
 	<open_files>
 		<docitem>
-			<path>..\src\client\Search.java</path>
+			<path>..\src\filesystem\Resolver.java</path>
 			<source>true</source>
 			<index>0</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>..\src\tools\Freshen.java</path>
+			<path>..\src\filesystem\Render.java</path>
 			<source>true</source>
 			<index>1</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>..\src\tools\Profiler.java</path>
+			<path>..\src\filesystem\Search.java</path>
 			<source>true</source>
 			<index>2</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>..\src\filesystem\Resolver.java</path>
+			<path>..\src\tools\Profiler.java</path>
 			<source>true</source>
 			<index>3</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>..\src\filesystem\Render.java</path>
+			<path>..\src\tools\ResourceProfile.java</path>
 			<source>true</source>
 			<index>4</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>..\src\filesystem\Downloader.java</path>
-			<source>true</source>
-			<index>5</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>..\..\..\..\..\java\docs\api\java\io\InputStreamReader.html</path>
-			<source>false</source>
-			<index>6</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>..\..\..\..\..\java\docs\apidocs\javax\servlet\http\HttpServletResponse.html</path>
-			<source>false</source>
-			<index>7</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
 			<path>..\src\filesystem\Status.java</path>
 			<source>true</source>
-			<index>8</index>
+			<index>5</index>
 			<active>true</active>
-		</docitem>
-		<docitem>
-			<path>..\..\..\..\..\java\docs\api\java\util\Collections.html</path>
-			<source>false</source>
-			<index>9</index>
-			<active>false</active>
 		</docitem>
 	</open_files>
 </workspace_user>

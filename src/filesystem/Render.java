@@ -49,6 +49,7 @@ import javax.servlet.http.HttpServletResponse;
 
 //import javax.xml.transform.*;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.stream.StreamSource;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,6 +77,8 @@ public class Render extends SmartHttpServlet
 	String	mRootPath = null;
 	String	mResolver = "/resolver";
 	String	mRender = "/render";
+	String	mURLSource = null;
+	String	mLocalFile = null;
    private	HashMap mCache = new HashMap(20);
 	
 	// Task options
@@ -101,6 +104,8 @@ public class Render extends SmartHttpServlet
 		mAppOptions.addOption( "r", "resolver", true, "Resolver. The URL to the resource identifier resolver." );
 		mAppOptions.addOption( "s", "stylesheet", true, "Stylesheet. The base name of the XML Stylesheet to use." );
 		mAppOptions.addOption( "i", "id", true, "ID. The registry ID to set for each resource" );
+		mAppOptions.addOption( "u", "url", true, "URL. Render the XML returned from a URL" );
+		mAppOptions.addOption( "l", "local", true, "Local. Render a local file." );
 		mAppOptions.addOption( "o", "output", true, "Output. Output generated profiles to {file}. Default: System.out." );
 	}	
 	
@@ -125,15 +130,22 @@ public class Render extends SmartHttpServlet
 		try { // parse the command line arguments
          CommandLine line = parser.parse(me.mAppOptions, args);
 
+         // Command-line and servlet options
 			if(line.hasOption("h")) me.showHelp();
-			if(line.hasOption("v")) me.mVerbose = true;
-			if(line.hasOption("o")) outfile = line.getOptionValue("o");
-			if(line.hasOption("p")) me.mRootPath = line.getOptionValue("p");
-			if(line.hasOption("r")) me.mResolver = line.getOptionValue("r");
 			if(line.hasOption("i")) me.mIdentifier = line.getOptionValue("i");
 			if(line.hasOption("s")) me.mStylesheet = line.getOptionValue("s");
-         if(line.hasOption("c")) me.clearCache();
+			if(line.hasOption("u")) me.mURLSource = line.getOptionValue("u");
          if(line.hasOption("f")) me.mFull = true;
+         
+         if(line.hasOption("c")) me.clearCache();
+         
+			// Command-line only options
+			if(line.hasOption("v")) me.mVerbose = true;
+			if(line.hasOption("o")) outfile = line.getOptionValue("o");
+         if(line.hasOption("l")) me.mLocalFile = line.getOptionValue("l");
+			if(line.hasOption("p")) me.mRootPath = line.getOptionValue("p");
+			if(line.hasOption("r")) me.mResolver = line.getOptionValue("r");
+         
 			
 			if(outfile != null) {
 				me.mOut.setOut(new PrintStream(outfile));
@@ -177,7 +189,7 @@ public class Render extends SmartHttpServlet
 	public void sendCapabilities(String title)
    	throws Exception
 	{
-		String param[] = {"help", "id", "full", "stylesheet"};
+		String param[] = {"help", "id", "full", "stylesheet", "url"};
 		ArrayList<String> aware = null;
 			
 		sendCapabilities(title, mOverview, mAcknowledge, param, aware);
@@ -224,6 +236,8 @@ public class Render extends SmartHttpServlet
 		mStylesheet = "spase";
 		mIdentifier = null;
 		mFull = false;
+		mURLSource = null;
+		mLocalFile = null;
 	}
 
 	/** 
@@ -245,6 +259,9 @@ public class Render extends SmartHttpServlet
 		
 		setStylesheet(igpp.util.Text.getValue(request.getParameter("s"), getStylesheet()));
 		setStylesheet(igpp.util.Text.getValue(request.getParameter("stylesheet"), getStylesheet()));
+
+		setURLSource(igpp.util.Text.getValue(request.getParameter("u"), getURLSource()));
+		setURLSource(igpp.util.Text.getValue(request.getParameter("url"), getURLSource()));
 	}	
 		
    /**
@@ -328,8 +345,8 @@ public class Render extends SmartHttpServlet
             mOut.println("No stylesheet parameter supplied");
             return;
         }
-        if(mIdentifier == null) {
-            mOut.println("No resource identifier supplied");
+        if(mIdentifier == null && mURLSource == null && mLocalFile == null) {
+            mOut.println("No resource source (identifier or URL) supplied");
             return;
         }
         
@@ -348,10 +365,19 @@ public class Render extends SmartHttpServlet
         // Call the URL and transform the result.
         String service = "";
         try {
-        		String fullFlag = "";
-	        	if(mFull) fullFlag = "&r=yes";
-	        	service = mResolver + "?i=" + mIdentifier + fullFlag;
-				transformer.transform(igpp.xml.Transform.getURLSource(service), mOut.getStreamResult());
+        		if(mLocalFile != null) {  // Use local reference
+					transformer.transform(new StreamSource(mLocalFile), mOut.getStreamResult());
+        		} else {
+	        		if(mURLSource != null) {	// Use passed URL
+	        			service = mURLSource;
+	        		} 
+	        		if(mIdentifier != null) {	// Use resolver
+		        		String fullFlag = "";
+			        	if(mFull) fullFlag = "&r=yes";
+			        	service = mResolver + "?i=" + mIdentifier + fullFlag;
+	        		}
+					transformer.transform(igpp.xml.Transform.getURLSource(service), mOut.getStreamResult());
+        		}
         } catch(Exception e) {
         		mOut.println("Unable to render resource description for viewing.<br/>");
         		mOut.println("Calling resolver: " + getResolver() + "<br/>");
@@ -383,6 +409,11 @@ public class Render extends SmartHttpServlet
 	public void setFull(String value) { mFull = igpp.util.Text.isTrue(value); }
 	public void setFull(boolean value) { mFull = value; }
 	public boolean getFull() { return mFull; }
+	
+	public void setU(String value) { setURLSource(value); }
+	public void setUrl(String value) { mURLSource = value; }
+	public void setURLSource(String value) { mURLSource = value; }
+	public String getURLSource() { return mURLSource; }
 	
 	private void setRootPath(String value) { mRootPath = value; }
 	public String getRootPath() { return mRootPath; }

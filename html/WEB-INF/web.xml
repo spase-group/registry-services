@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+<!-- Site name and description -->	
+  <display-name>SPASE Registry Service</display-name>
+  <description>SPASE Registry Service</description>
+
+<!-- Welcome files -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+  </welcome-file-list>
+
+<!-- Servlets -->
+
+<!-- Standard Registry Services -->
+<!-- Resource ID Resolver Service -->
+<servlet>
+   <servlet-name>org.spase.registry.server.Resolver</servlet-name>
+   <servlet-class>org.spase.registry.server.Resolver</servlet-class>
+   <init-param> <!-- Authority/Path mapping -->
+      <param-name>AuthorityList</param-name>
+      <param-value>authority.conf</param-value>
+   </init-param>
+</servlet>
+
+<servlet-mapping>
+   <servlet-name>org.spase.registry.server.Resolver</servlet-name>
+   <url-pattern>/resolver</url-pattern>
+</servlet-mapping>
+
+<!-- Search Service -->
+<servlet>
+   <servlet-name>org.spase.registry.server.Search</servlet-name>
+   <servlet-class>org.spase.registry.server.Search</servlet-class>
+   <init-param> <!-- Authority/Path mapping -->
+      <param-name>AuthorityList</param-name>
+      <param-value>authority.conf</param-value>
+   </init-param>
+</servlet>
+
+<servlet-mapping>
+   <servlet-name>org.spase.registry.server.Search</servlet-name>
+   <url-pattern>/search</url-pattern>
+</servlet-mapping>
+
+<!-- Registry Status Service -->
+<servlet>
+   <servlet-name>org.spase.registry.server.Status</servlet-name>
+   <servlet-class>org.spase.registry.server.Status</servlet-class>
+   <init-param> <!-- Authority/Path mapping -->
+      <param-name>AuthorityList</param-name>
+      <param-value>authority.conf</param-value>
+   </init-param>
+</servlet>
+
+<servlet-mapping>
+   <servlet-name>org.spase.registry.server.Status</servlet-name>
+   <url-pattern>/status</url-pattern>
+</servlet-mapping>
+
+<!-- Render Service -->
+<servlet>
+   <servlet-name>org.spase.registry.server.Render</servlet-name>
+   <servlet-class>org.spase.registry.server.Render</servlet-class>
+   <init-param> <!-- Path to Resource ID resolver -->
+      <param-name>Resolver</param-name>
+      <param-value>/resolver</param-value>
+   </init-param>
+   <init-param> <!-- Where stylesheets are stored -->
+      <param-name>RootPath</param-name>
+      <param-value>xsl</param-value>
+   </init-param>
+</servlet>
+
+<servlet-mapping>
+   <servlet-name>org.spase.registry.server.Render</servlet-name>
+   <url-pattern>/render</url-pattern>
+</servlet-mapping>
+
+<!-- Downloader Service -->
+<servlet>
+   <servlet-name>org.spase.registry.server.Downloader</servlet-name>
+   <servlet-class>org.spase.registry.server.Downloader</servlet-class>
+   <init-param> <!-- Path to Resource ID resolver -->
+      <param-name>Resolver</param-name>
+      <param-value>/resolver</param-value>
+   </init-param>
+   <init-param> <!-- Provider Name -->
+      <param-name>Provider</param-name>
+      <param-value>SPASE</param-value>
+   </init-param>
+</servlet>
+
+<servlet-mapping>
+   <servlet-name>org.spase.registry.server.Downloader</servlet-name>
+   <url-pattern>/download</url-pattern>
+</servlet-mapping>
+
+</web-app>

@@ -43,6 +43,7 @@ public class ResourceProfile
 	String mLongitude = "";
 	ArrayList<String> mAssociation = new ArrayList<String>();
    ArrayList<String> mWords = new ArrayList<String>();
+   ArrayList<String> mKeywords = new ArrayList<String>();
 
     /** 
 	 * Command-line interface.
@@ -91,6 +92,7 @@ public class ResourceProfile
 		
 		for(String buffer : mAssociation) {	out.println("   <field name=\"association\">" + buffer + "</field>"); }
 		for(String buffer : mWords) {	out.println("   <field name=\"word\">" + buffer + "</field>"); }
+		for(String buffer : mKeywords) {	out.println("   <field name=\"keyword\">" + buffer + "</field>"); }
 		
    	out.println("</doc>");
    }
@@ -249,4 +251,10 @@ public class ResourceProfile
 	public void setWords(String value) { mWords.clear(); mWords.add(value); }
 	public void setWords(ArrayList<String> value) { mWords.clear(); mWords.addAll(value); }
 	public ArrayList<String> getWords() { return mWords; }
+
+	public void addKeywords(String value) { mKeywords.add(value); }
+	public void addKeywords(ArrayList<String> value) { mKeywords.addAll(value); }
+	public void setKeywords(String value) { mKeywords.clear(); mKeywords.add(value); }
+	public void setKeywords(ArrayList<String> value) { mKeywords.clear(); mKeywords.addAll(value); }
+	public ArrayList<String> getKeywords() { return mKeywords; }
 }

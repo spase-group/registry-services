@@ -11,13 +11,13 @@
 	</users>
 	<projects>
 		<project>
-			<path>..\src\filesystem\filesystem.jcp</path>
+			<path>..\src\tools\tools.jcp</path>
 		</project>
 		<project>
 			<path>..\src\client\client.jcp</path>
 		</project>
 		<project>
-			<path>..\src\tools\tools.jcp</path>
+			<path>..\src\filesystem\filesystem.jcp</path>
 		</project>
 	</projects>
 </workspace>

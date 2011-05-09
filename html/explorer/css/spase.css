@@ -1,0 +1,208 @@
+           /* http://meyerweb.com/eric/tools/css/reset/ */
+            /* v1.0 | 20080212 */
+            
+            div.spase {
+               margin: 0;
+               padding: 0;
+               border: 0;
+               outline: 0;
+               font-size: 12px;
+               vertical-align: baseline;
+               background: transparent;
+            }
+            div.spase ol, 
+            div.spase ul {
+               list-style: none;
+            }
+            div.spase blockquote, 
+            div.spase q {
+               quotes: none;
+            }
+            div.spase blockquote:before, 
+            div.spase blockquote:after,
+            div.spase q:before, 
+            div.spase q:after {
+               content: '';
+               content: none;
+            }
+            
+            /* remember to highlight inserts somehow! */
+            div.spase ins {
+               text-decoration: none;
+            }
+            div.spase del {
+               text-decoration: line-through;
+            }
+            
+
+            div.spase h1, 
+            div.spase h2, 
+            div.spase h3, 
+            div.spase h4, 
+            div.spase h5, 
+            div.spase h6 {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                margin-left: 2ex;
+                margin-right: 2ex;
+                font-weight:bold;
+            }
+            
+            div.spase h1 {
+                font-size: 140%;
+            }
+            
+            div.spase h2 {
+                font-size: 120%;
+            }
+            
+            div.spase h3 {
+                font-size: 110%;
+                font-style: oblique;
+            }
+            
+            div.spase p {
+                margin-bottom: 0.75ex;
+            }
+            
+            div.spase dt {
+                margin-top: 5px;
+                padding-left: 5px;
+                border-top: 1px solid #DDD;
+                font-weight: bold;
+            }
+            
+            div.spase dd {
+                margin-left: 5ex;
+            }
+            
+            div.spase dd:hover {
+                background-color: white;
+            }
+            
+            div.spase a:link,
+            div.spase a:visited {
+               color: #277bc0;/* #339;*/
+               font-weight:bolder; 
+               text-decoration:none; 
+            }
+            
+            div.spase a:hover {
+               color: blue;
+               font-weight:bolder; 
+               text-decoration:underline; 
+            }
+            
+            div.spase .toparrow {
+                position: relative;
+                float: right;
+                bottom: 2.5ex;
+                right: 0.5ex;
+            }
+            
+            div.spase ul {
+                list-style: square inside ;
+                margin-bottom: 0.75ex;
+            }
+            
+            /* tables still need 'cellspacing="0"' in the markup */
+            div.spase table {
+               border-collapse: collapse;
+               border-spacing: 0;
+            }
+            
+            div.spase table {
+               border: thin solid #666;
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+            
+            div.spase thead,
+            div.spase tbody {
+               border: thin solid #666;
+            }
+            
+            div.spase td, 
+            div.spase th {
+               margin: 0;
+               padding: 2px 2px 2px 2px;
+               font-size: 12px;
+            }
+            
+            div.spase th {
+                font-weight:bold;
+                font-style: oblique;
+            }
+            
+            div.spase {
+                background-color: white;
+                border: thin solid #333;
+                padding: 10px 15px 10px 15px;
+                margin-top: 10px;
+            }
+            
+            div.parameter {
+                margin-top: 10px;
+                padding: 5px 10px 10px 10px;
+                border: thin dotted #333;
+                background-color: #ebebeb;
+            }
+            
+            div.granule dt {
+                border-top-style: none;
+            }
+            
+            #toc {
+               border: thin solid #333;
+               background-color: #F5F5F5; 
+               padding: 10px 15px 10px 15px;
+               margin-left: 5%;
+                margin-right: 5%;
+               margin-bottom: 30px;
+            }
+            
+            #toc ol, 
+            div.spase ul, 
+            div.spase li {
+                padding-left: 5ex;
+            }
+            
+            #toc ol {
+                list-style-type: decimal;
+                list-style-position: inside; 
+            }
+            
+            #toc ul {
+                list-style-type: square;
+                list-style-position: inside; 
+            }
+            
+            p.version {
+              float: right;
+              width: 100%;
+              margin-top: 5px;
+              padding-right: 5px;
+              text-align: right;
+              font-size: x-small;
+            }
+            div.spase a.xml-logo:link,
+            div.spase a.xml-logo:visited {
+               background: #ff6600;
+               color: #ffffff;
+               font-weight:bolder; 
+               font-size: 10px;
+               text-decoration:none; 
+               padding-left:2px;
+               padding-right:2px;
+            }
+            div.spase a.xml-logo:hover {
+               text-decoration:underline; 
+            }
+            
+            /* SPASE CSS */
+            :focus {
+                outline: 0;
+                outline-color: invert;
+                outline-style: dotted;
+                outline-width: thin;
+            }

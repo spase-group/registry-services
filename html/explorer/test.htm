@@ -1,0 +1,16 @@
+<html>
+	<head>
+	</head>
+	<body>
+		Hello
+		<script>
+			document.write("Location path: " + window.location.pathname);
+			path = window.location.pathname;
+			n = path.lastIndexOf('/');
+			if(n != -1) path = path.substring(0, n);
+			n = path.lastIndexOf('/');
+			if(n != -1) path = path.substring(0, n);
+			document.write("Service path: " + path);
+		</script>
+	</body>
+</html>

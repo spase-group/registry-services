@@ -20,6 +20,7 @@ package org.spase.registry.server;
 import igpp.servlet.MultiPrinter;
 import igpp.servlet.SmartHttpServlet;
 
+import igpp.util.Date;
 import igpp.util.Encode;
 import igpp.util.Text;
 import igpp.util.StringListComparator;
@@ -34,6 +35,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Collections;
+import java.util.Calendar;
 
 // import java.net.*;
 import java.net.URL;
@@ -579,6 +581,16 @@ public class Resolver extends SmartHttpServlet
 	public void getGranules(String id, String startDate, String stopDate, Boolean sendDesc, Boolean sendURL, Boolean sendSize)
    	throws Exception
 	{
+		//Fix-up dates
+		if(startDate != null) {
+			Calendar startCal = igpp.util.Date.parseISO8601(startDate, false);
+			startDate = igpp.util.Date.getISO8601DateString(startCal);
+		}
+		if(stopDate != null) {
+			Calendar stopCal = igpp.util.Date.parseISO8601(stopDate, true);
+			stopDate = igpp.util.Date.getISO8601DateString(stopCal);
+		}
+		
 		mOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		mOut.println("<Response>");
 		

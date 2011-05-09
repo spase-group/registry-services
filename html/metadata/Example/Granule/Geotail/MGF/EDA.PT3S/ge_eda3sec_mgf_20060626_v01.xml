@@ -1,0 +1,20 @@
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.spase-group.org/data/schema">
+<Version>1.3.0</Version>
+<Granule>
+  <ResourceID>spase://Example/Granule/Geotail/MGF/EDA.PT3S/ge_eda3sec_mgf_20060626_v01</ResourceID>
+  <ReleaseDate>2009-03-28T08:54:55Z</ReleaseDate>
+  <ParentID>spase://Example/NumericalData/Geotail/MGF/EDA.PT3S</ParentID>
+  <URL>ftp://cdaweb.gsfc.nasa.gov/pub/istp/geotail/eda3sec_mgf/2006/ge_eda3sec_mgf_20060626_v01.cdf</URL>
+  <StartDate>2006-06-26T06:28:51Z</StartDate>
+  <StopDate>2006-06-26T13:45:28Z</StopDate>
+  <Checksum>
+    <HashValue>90d32a54dfdc73211c357c88cd835e29</HashValue>
+    <HashFunction>MD5</HashFunction>
+  </Checksum>
+  <DataExtent>
+    <Bytes>862225</Bytes>
+    <Units>Bytes</Units>
+  </DataExtent>
+</Granule>
+</Spase>

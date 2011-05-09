@@ -40,6 +40,9 @@
 				<path>Resolver.java</path>
 			</fileitem>
 			<fileitem>
+				<path>Search.java</path>
+			</fileitem>
+			<fileitem>
 				<path>SimpleReg.java</path>
 			</fileitem>
 			<fileitem>

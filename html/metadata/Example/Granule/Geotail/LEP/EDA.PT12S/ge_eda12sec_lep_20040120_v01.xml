@@ -1,0 +1,20 @@
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.spase-group.org/data/schema">
+<Version>1.3.0</Version>
+<Granule>
+  <ResourceID>spase://Example/Granule/Geotail/LEP/EDA.PT12S/ge_eda12sec_lep_20040120_v01</ResourceID>
+  <ReleaseDate>2009-03-27T19:18:35Z</ReleaseDate>
+  <ParentID>spase://Example/NumericalData/Geotail/LEP/EDA.PT12S</ParentID>
+  <URL>ftp://cdaweb.gsfc.nasa.gov/pub/istp/geotail/eda12sec_lep/2004/ge_eda12sec_lep_20040120_v01.cdf</URL>
+  <StartDate>2004-01-20T19:07:34Z</StartDate>
+  <StopDate>2004-01-20T21:36:47Z</StopDate>
+  <Checksum>
+    <HashValue>d3f7c04561a2fa3ab9a57e74f1f3f502</HashValue>
+    <HashFunction>MD5</HashFunction>
+  </Checksum>
+  <DataExtent>
+    <Bytes>111878</Bytes>
+    <Units>Bytes</Units>
+  </DataExtent>
+</Granule>
+</Spase>
