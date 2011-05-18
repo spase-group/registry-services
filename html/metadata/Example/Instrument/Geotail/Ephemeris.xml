@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.spase-group.org/data/schema" xsi:schemaLocation="http://www.spase-group.org/data/schema http://www.spase-group.org/data/schema/spase-2_0_0.xsd">
+  <Version>2.0.0</Version>
+  <Instrument>
+    <ResourceID>spase://Example/Instrument/Geotail/Ephemeris</ResourceID>
+    <ResourceHeader>
+      <ResourceName>Geotail Spacecraft Position</ResourceName>
+      <AlternateName>Geotail Position</AlternateName>
+      <ReleaseDate>2009-05-20T21:10:15Z</ReleaseDate>
+      <Description>Geotail spacecraft position in various coordinate systems</Description>
+      <Contact>
+        <PersonID>spase://Example/Person/Jan.Merka</PersonID>
+        <Role>MetadataContact</Role>
+      </Contact>
+    </ResourceHeader>
+    <InstrumentType>Platform</InstrumentType>
+    <InvestigationName>Spacecraft position</InvestigationName>
+    <ObservatoryID>spase://Example/Observatory/Geotail</ObservatoryID>
+  </Instrument>
+</Spase>

@@ -15,6 +15,6 @@
     <property name="release.host"  value="release.igpp.ucla.edu" />
     <property name="release.path"  value="/var/www/release/root/applications/spase/registry" />
     <property name="release.local"   value="/java/jre/lib/ext" />
-    <property name="release.jar"   value="/projects/jar/spase" />
+    <property name="release.jar"   value="/projects/jar" />
     
 </project>
