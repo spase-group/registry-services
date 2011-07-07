@@ -2,13 +2,9 @@
 
 <workspace_user>
 	<active_project>
-		<label>tools</label>
+		<label>filesystem</label>
 	</active_project>
 	<projects>
-		<project>
-			<label>tools</label>
-			<showfiles>false</showfiles>
-		</project>
 		<project>
 			<label>client</label>
 			<showfiles>false</showfiles>
@@ -17,43 +13,29 @@
 			<label>filesystem</label>
 			<showfiles>false</showfiles>
 		</project>
+		<project>
+			<label>tools</label>
+			<showfiles>false</showfiles>
+		</project>
 	</projects>
 	<open_files>
 		<docitem>
 			<path>..\src\filesystem\Resolver.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
-			<path>..\src\filesystem\Render.java</path>
-			<source>true</source>
+			<path>..\..\..\..\..\java\docs\api\java\util\Set.html</path>
+			<source>false</source>
 			<index>1</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>..\src\filesystem\Search.java</path>
-			<source>true</source>
-			<index>2</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>..\src\tools\Profiler.java</path>
 			<source>true</source>
-			<index>3</index>
+			<index>2</index>
 			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>..\src\tools\ResourceProfile.java</path>
-			<source>true</source>
-			<index>4</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>..\src\filesystem\Status.java</path>
-			<source>true</source>
-			<index>5</index>
-			<active>true</active>
 		</docitem>
 	</open_files>
 </workspace_user>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.spase-group.org/data/schema" xsi:schemaLocation="http://www.spase-group.org/data/schema http://www.spase-group.org/data/schema/spase-2_0_1.xsd">
+  <Version>2.0.1</Version>
+  <NumericalData>
+    <ResourceID>spase://Example/NumericalData/Geotail/CPI/SWA_PT48S</ResourceID>
+    <ResourceHeader>
+      <ResourceName>Geotail CPI Definitive Solar Wind Moments</ResourceName>
+      <ReleaseDate>2009-07-15T22:15:10Z</ReleaseDate>
+      <Description>An example subset of the CPI Solar Wind analyzer definitive plasma moments. The CPI/SW data are good in the solar wind and may be usefull in the magnetosheath.
+  </Description>
+      <Contact>
+        <PersonID>spase://Example/Person/Louis.A.Frank</PersonID>
+        <Role>PrincipalInvestigator</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/Kent.L.Ackerson</PersonID>
+        <Role>DataProducer</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/Jan.Merka</PersonID>
+        <Role>MetadataContact</Role>
+      </Contact>
+      <InformationURL>
+        <Name>CPI Survey Plots</Name>
+        <URL>http://www-pi.physics.uiowa.edu/cpi/</URL>
+        <Description>Geotail CPI description and survey plots.</Description>
+      </InformationURL>
+    </ResourceHeader>
+    <AccessInformation>
+      <RepositoryID>spase://Example/Repository/NASA/GSFC/SPDF/CDAWeb</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+        <Name>CDAWeb FTP download</Name>
+        <URL>ftp://cdaweb.gsfc.nasa.gov/pub/istp/geotail/cpi_h0/</URL>
+      </AccessURL>
+      <Format>CDF</Format>
+      <Encoding>None</Encoding>
+    </AccessInformation>
+    <AccessInformation>
+      <RepositoryID>spase://Example/Repository/UI</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+        <Name>University of Iowa: Geotail CPI SW data</Name>
+        <URL>http://erebus.physics.uiowa.edu/cpi-data/sw/</URL>
+      </AccessURL>
+      <Format>Text</Format>
+      <Encoding>ASCII</Encoding>
+    </AccessInformation>
+    <InstrumentID>spase://Example/Instrument/Geotail/CPI</InstrumentID>
+    <MeasurementType>ThermalPlasma</MeasurementType>
+    <MeasurementType>IonComposition</MeasurementType>
+    <TemporalDescription>
+      <TimeSpan>
+        <StartDate>2004-01-01T00:00:00Z</StartDate>
+        <StopDate>2004-12-31T24:00:00Z</StopDate>
+      </TimeSpan>
+      <Cadence>PT48S</Cadence>
+    </TemporalDescription>
+    <ObservedRegion>Heliosphere.NearEarth</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosheath</ObservedRegion>
+    <Caveats>The CPI solar wind ion analyzer is an E/Q analyzer and the initial distribution functions were calculated assuming that the plasma is H+. Care must be taken when multi-component plasmas are present. If He++ is present and is flowing with the same speed as the H+ component, it will contribute to the distribution function at twice the velocity (four times the energy) of the H+. To facilitate the automated processing of the data the integral was evaluated between |vmin| = 171 km/s and |vmax| = 1.35 × |u|. The resulting temperatures produce excellent fits to the observations. When He++ is present the distribution functions are consistent with an He++ temperature, THe++ = 4 × TH+, i.e., the H+ and He++ have similar thermal velocities.</Caveats>
+    <Parameter>
+      <Name>Time</Name>
+      <ParameterKey>Epoch</ParameterKey>
+      <Description>Time in milliseconds, centered, since CDF Epoch</Description>
+      <Units>ms</Units>
+      <UnitsConversion>1e-3&gt;s</UnitsConversion>
+      <ValidMin>08-Sep-1992 00:00:00.000</ValidMin>
+      <ValidMax>31-Dec-2020 20:00:00.000</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Vi GSE (r,theta,phi)</Name>
+      <ParameterKey>SW_V</ParameterKey>
+      <Description>Ion bulk flow velocity vector in spherical GSE coordinates</Description>
+      <Caveats>From 5 deg angular bins</Caveats>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Spherical</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <RenderingHints>
+        <ValueFormat>F9.2</ValueFormat>
+      </RenderingHints>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Vr</Name>
+          <Qualifier>Magnitude</Qualifier>
+          <Index>1</Index>
+          <Units>km/s</Units>
+          <ValidMin>0.0</ValidMin>
+          <ValidMax>1200.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vtheta</Name>
+          <Qualifier>DirectionAngle.ElevationAngle</Qualifier>
+          <Index>2</Index>
+          <Units>deg</Units>
+          <ValidMin>0.0</ValidMin>
+          <ValidMax>180.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vphi</Name>
+          <Qualifier>DirectionAngle.AzimuthAngle</Qualifier>
+          <Index>3</Index>
+          <Units>deg</Units>
+          <ValidMin>0.0</ValidMin>
+          <ValidMax>360.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Vector</Qualifier>
+        <ParticleQuantity>FlowVelocity</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Vi GSE</Name>
+      <ParameterKey>SW_Vc</ParameterKey>
+      <Description>Ion bulk flow velocity vector in GSE cartesian coordinates</Description>
+      <Caveats>From 5 deg angular bins</Caveats>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <RenderingHints>
+        <ValueFormat>F7.0</ValueFormat>
+      </RenderingHints>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Vx</Name>
+          <Qualifier>Component.I</Qualifier>
+          <Index>1</Index>
+          <ValidMin>-1400.0</ValidMin>
+          <ValidMax>1400.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vy</Name>
+          <Qualifier>Component.J</Qualifier>
+          <Index>2</Index>
+          <ValidMin>-1400.0</ValidMin>
+          <ValidMax>1400.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vz</Name>
+          <Qualifier>Component.K</Qualifier>
+          <Index>3</Index>
+          <ValidMin>-1400.0</ValidMin>
+          <ValidMax>1400.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Vector</Qualifier>
+        <ParticleQuantity>FlowVelocity</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Ti</Name>
+      <ParameterKey>SW_T</ParameterKey>
+      <Description>Kinetic temperature of hydrogen component of solar wind, scalar</Description>
+      <Caveats>Calculated by integrating the distribution function</Caveats>
+      <Units>K</Units>
+      <RenderingHints>
+        <ValueFormat>F7.0</ValueFormat>
+      </RenderingHints>
+      <ValidMin>10000.0</ValidMin>
+      <ValidMax>1.0E7</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>Temperature</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Np</Name>
+      <ParameterKey>SW_P_Den</ParameterKey>
+      <Description>Ion number density (SWA), scalar</Description>
+      <Caveats>Assuming no helium (0.3 - several hundred) if the density is less than 0.3/cc the higher moments (velocity, temperature) shall not be used because of the poor counting statistics.</Caveats>
+      <Units>cm^-3</Units>
+      <UnitsConversion>1e6&gt;m^-3</UnitsConversion>
+      <RenderingHints>
+        <ValueFormat>F8.3</ValueFormat>
+      </RenderingHints>
+      <ValidMin>0.01</ValidMin>
+      <ValidMax>1000.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>NumberDensity</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Psw</Name>
+      <ParameterKey>SW_Pressure</ParameterKey>
+      <Description>Ion pressure (assuming protons measured and adding 5% alphas, from SWA), scalar</Description>
+      <Caveats>Assuming Vp = Va, P = C * Np * mp * Vp*Vp * [1 + 4(.05)]. mp = 1.67 * 10^(-27), C = 10^(21), Np in #/cc, Vp in km/s. Pressure not provided for density less than 0.3/cc because of the poor counting statistics.</Caveats>
+      <Units>nPa</Units>
+      <UnitsConversion>1e-9&gt;Pa</UnitsConversion>
+      <ValidMin>1.0E-4</ValidMin>
+      <ValidMax>100.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>Pressure</ParticleQuantity>
+      </Particle>
+    </Parameter>
+  </NumericalData>
+</Spase>

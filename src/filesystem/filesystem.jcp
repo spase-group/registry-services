@@ -25,6 +25,7 @@
 			<debugger_ref/>
 			<param/>
 			<run/>
+			<verify>true</verify>
 		</runtime>
 	</runtimes>
 	<libraries/>

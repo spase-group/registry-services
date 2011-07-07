@@ -23,6 +23,7 @@
 			<debugger_ref/>
 			<param/>
 			<run>org.spase.registry.Search</run>
+			<verify>true</verify>
 		</runtime>
 	</runtimes>
 	<libraries/>

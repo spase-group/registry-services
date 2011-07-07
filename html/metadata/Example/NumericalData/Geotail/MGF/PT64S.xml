@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.spase-group.org/data/schema" xsi:schemaLocation="http://www.spase-group.org/data/schema http://www.spase-group.org/data/schema/spase-2_0_0.xsd">
+  <Version>2.0.0</Version>
+  <NumericalData>
+    <ResourceID>spase://Example/NumericalData/Geotail/MGF/PT64S</ResourceID>
+    <ResourceHeader>
+      <ResourceName>Geotail KP Magnetic Field Data (64s)</ResourceName>
+      <ReleaseDate>2009-05-20T23:06:12Z</ReleaseDate>
+      <Description>An example subset of the data set which contains the investigator-selected Key Parameters from the Magnetic Field instrument (MGF) on Geotail, as made available via NSSDC's interactive WWW interface CDAWeb.
+      
+      Selected references:
+      
+Kokubun, S., et al., Magnetic field measurement (MGF), In Geotail Prelaunch Report, SES-TD-92-007SY, Institute of Space and Astronautical Science, SES Data Center, pp. 58-70, Apr. 1992.
+
+Nishida, A., et al., Geotail mission to explore earth's magnetotail, EOS, 73, No. 40, Oct. 1992.
+
+Kokubun, S., et al., The GEOTAIL Magnetic Field Experiment, J. Geomag. Geoelectr., 46, No. 1, 7-21, 1994.</Description>
+      <Acknowledgement>Data were provided by T. Nagai at Institute of Space and Astronautical Science, JAXA in Japan.</Acknowledgement>
+      <Contact>
+        <PersonID>spase://Example/Person/Tsugunobu.Nagai</PersonID>
+        <Role>PrincipalInvestigator</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/Donald.H.Fairfield</PersonID>
+        <Role>Scientist</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/Jan.Merka</PersonID>
+        <Role>MetadataContact</Role>
+      </Contact>
+      <InformationURL>
+        <Name>The Geotail Magnetic Field Experiment (MGF)</Name>
+        <URL>http://www.darts.isas.ac.jp/stp/geotail/jgg_mgf.pdf</URL>
+        <Description>Reprint of Kokubun, S., T. Yamamoto, M. H. Acuna, K. Hayashi, K. Shiokawa, and H. Kawano, The Geotail Magnetic Field Experiment, J. Geomag. Geoelectr., 46, 7-21, 1994.</Description>
+      </InformationURL>
+      <InformationURL>
+        <Name>Key Parameters GE_K0_MGF from the Geotail Magnetic Field Instrument (MGF) in CDF</Name>
+        <URL>http://nssdc.gsfc.nasa.gov/nmc/datasetDisplay.do?id=SPHE-00568</URL>
+      </InformationURL>
+    </ResourceHeader>
+    <AccessInformation>
+      <RepositoryID>spase://Example/Repository/NASA/GSFC/SPDF/CDAWeb</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+        <Name>CDAWeb FTP download</Name>
+        <URL>ftp://cdaweb.gsfc.nasa.gov/pub/istp/geotail/mgf/</URL>
+      </AccessURL>
+      <Format>CDF</Format>
+      <Encoding>None</Encoding>
+    </AccessInformation>
+    <InstrumentID>spase://Example/Instrument/Geotail/MGF</InstrumentID>
+    <MeasurementType>MagneticField</MeasurementType>
+    <TemporalDescription>
+      <TimeSpan>
+        <StartDate>2004-01-01T00:00:00Z</StartDate>
+        <StopDate>2004-12-31T24:00:00Z</StopDate>
+      </TimeSpan>
+      <Cadence>PT64S</Cadence>
+    </TemporalDescription>
+    <ObservedRegion>Heliosphere.NearEarth</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosheath</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosphere</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosphere.Magnetotail</ObservedRegion>
+    <Caveats>Switched from outer magnetometer to inner in January 2007.
+    
+    This data is computed with a preliminary algorithm and is not necessarily complete nor is it certified by the experimenters or considered publishable.</Caveats>
+    <Parameter>
+      <Name>Time</Name>
+      <ParameterKey>Epoch</ParameterKey>
+      <Description>Time in miliseconds since CDF epoch</Description>
+      <Units>ms</Units>
+      <UnitsConversion>1e-3&gt;s</UnitsConversion>
+      <ValidMin>01-Aug-1992 00:00:00.000</ValidMin>
+      <ValidMax>31-Dec-2000 23:59:59.000</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Time</Name>
+      <ParameterKey>Time_PB5</ParameterKey>
+      <Description>Time as an array (year, day of year and elapsed milliseconds of day).</Description>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Year</Name>
+          <Index>1</Index>
+          <Units>year</Units>
+          <ValidMin>1992</ValidMin>
+          <ValidMax>2020</ValidMax>
+          <FillValue>-2147483648</FillValue>
+        </Element>
+        <Element>
+          <Name>Day of Year (jan 1 = day 1)</Name>
+          <Index>2</Index>
+          <Units>day</Units>
+          <ValidMin>1</ValidMin>
+          <ValidMax>366</ValidMax>
+          <FillValue>-2147483648</FillValue>
+        </Element>
+        <Element>
+          <Name>Elapsed ms of day</Name>
+          <Index>3</Index>
+          <Units>ms</Units>
+          <ValidMin>0</ValidMin>
+          <ValidMax>86399000</ValidMax>
+          <FillValue>-2147483648</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Time of day</Name>
+      <ParameterKey>MSEC</ParameterKey>
+      <Description>Elapsed milliseconds of day</Description>
+      <Units>ms</Units>
+      <ValidMin>0</ValidMin>
+      <ValidMax>86400000</ValidMax>
+      <FillValue>-2147483648</FillValue>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Magnetic Field Intensity</Name>
+      <ParameterKey>IB</ParameterKey>
+      <Description>Observed magnetic field intensity</Description>
+      <Units>0.1nT</Units>
+      <UnitsConversion>1e-10&gt;T</UnitsConversion>
+      <ValidMin>-32768</ValidMin>
+      <ValidMax>32767</ValidMax>
+      <FillValue>-32768</FillValue>
+      <Field>
+        <Qualifier>Average</Qualifier>
+        <Qualifier>Magnitude</Qualifier>
+        <FieldQuantity>Magnetic</FieldQuantity>
+      </Field>
+    </Parameter>
+    <Parameter>
+      <Name>Magnetic Field (GSE)</Name>
+      <ParameterKey>IB_vector</ParameterKey>
+      <Description>Observed magnetic field vector in GSE coordinates</Description>
+      <Units>0.1nT</Units>
+      <UnitsConversion>1e-10&gt;T</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Bx</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-32768</ValidMin>
+          <ValidMax>32767</ValidMax>
+          <FillValue>-32768</FillValue>
+        </Element>
+        <Element>
+          <Name>By</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-32768</ValidMin>
+          <ValidMax>32767</ValidMax>
+          <FillValue>-32768</FillValue>
+        </Element>
+        <Element>
+          <Name>Bz</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-32768</ValidMin>
+          <ValidMax>32767</ValidMax>
+          <FillValue>-32768</FillValue>
+        </Element>
+      </Structure>
+      <Field>
+        <Qualifier>Average</Qualifier>
+        <Qualifier>Vector</Qualifier>
+        <FieldQuantity>Magnetic</FieldQuantity>
+      </Field>
+    </Parameter>
+    <Parameter>
+      <Name>B RMS (sensor coord)</Name>
+      <ParameterKey>IS_vector</ParameterKey>
+      <Description>Standard deviation of sin fitting for magnetic field in sensor coordinates</Description>
+      <Units>0.01nT</Units>
+      <UnitsConversion>1e-11&gt;T</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>SC</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Bx-RMS</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-32768</ValidMin>
+          <ValidMax>32767</ValidMax>
+          <FillValue>-32768</FillValue>
+        </Element>
+        <Element>
+          <Name>By-RMS</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-32768</ValidMin>
+          <ValidMax>32767</ValidMax>
+          <FillValue>-32768</FillValue>
+        </Element>
+        <Element>
+          <Name>Bz-RMS</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-32768</ValidMin>
+          <ValidMax>32767</ValidMax>
+          <FillValue>-32768</FillValue>
+        </Element>
+      </Structure>
+      <Field>
+        <Qualifier>StandardDeviation</Qualifier>
+        <Qualifier>Vector</Qualifier>
+        <FieldQuantity>Magnetic</FieldQuantity>
+      </Field>
+    </Parameter>
+    <Parameter>
+      <Name>MGF Range</Name>
+      <ParameterKey>RANGE_STATUS</ParameterKey>
+      <Description>Range status of the fluxgate magnetometer. 
+      
+      * 0 = Not valid 
+      * 1 = +/-    16 nT 
+      * 2 = +/-    64 nT 
+      * 3 = +/-   256 nT 
+      * 4 = +/-  1024 nT 
+      * 5 = +/-  4096 nT 
+      * 6 = +/- 16384 nT 
+      * 7 = +/- 65536 nT
+      </Description>
+      <ValidMin>1</ValidMin>
+      <ValidMax>7</ValidMax>
+      <FillValue>-32768</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Satellite Position (GSE)</Name>
+      <ParameterKey>POS</ParameterKey>
+      <Description>Satellite position vector in GSE coordinates</Description>
+      <Units>km</Units>
+      <UnitsConversion>1e3&gt;m</UnitsConversion>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>X-GSE</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Y-GSE</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Z-GSE</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Data Quality Flag</Name>
+      <ParameterKey>DQF</ParameterKey>
+      <Description>Data quality flag: Good/Bad/Fill (0: good; 1,2,3: poor 4: fill value)</Description>
+      <ValidMin>0</ValidMin>
+      <ValidMax>4</ValidMax>
+      <FillValue>-2147483648</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Post Gap Flag</Name>
+      <ParameterKey>Gap_Flag</ParameterKey>
+      <Description>Post gap flag. 0: no gap occurred; 1: gap occurred because SIRIUS data were illegal or because the instrument was not in a mode that allowed KP's 2: gap occurred because of the jump of MGF RANGE or MGF SENSE during 64 s</Description>
+      <ValidMin>0</ValidMin>
+      <ValidMax>2</ValidMax>
+      <FillValue>-2147483648</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+  </NumericalData>
+</Spase>

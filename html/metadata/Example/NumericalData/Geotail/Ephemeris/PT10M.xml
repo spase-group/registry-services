@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.spase-group.org/data/schema" xsi:schemaLocation="http://www.spase-group.org/data/schema http://www.spase-group.org/data/schema/spase-2_0_0.xsd">
+  <Version>2.0.0</Version>
+  <NumericalData>
+    <ResourceID>spase://VMO/NumericalData/Geotail/Ephemeris/PT10M</ResourceID>
+    <ResourceHeader>
+      <ResourceName>Geotail Spacecraft Definitive Positions</ResourceName>
+      <ReleaseDate>2009-05-20T23:06:12Z</ReleaseDate>
+      <Description>An example subset of the definitive Geotail spacecraft positions in various coordinate systems</Description>
+      <Contact>
+        <PersonID>spase://Example/Person/Gerald.Blackwell</PersonID>
+        <Role>DataProducer</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/Jan.Merka</PersonID>
+        <Role>MetadataContact</Role>
+      </Contact>
+    </ResourceHeader>
+    <AccessInformation>
+      <RepositoryID>spase://Example/Repository/NASA/GSFC/SPDF/CDAWeb</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+        <Name>CDAWeb FTP Access</Name>
+        <URL>ftp://cdaweb.gsfc.nasa.gov/pub/istp/geotail/def_or/</URL>
+        <Description>NASA/GSFC CDAWeb ftp access to the data.</Description>
+      </AccessURL>
+      <Format>CDF</Format>
+      <Encoding>None</Encoding>
+    </AccessInformation>
+    <InstrumentID>spase://Example/Instrument/Geotail/Ephemeris</InstrumentID>
+    <MeasurementType>Ephemeris</MeasurementType>
+    <TemporalDescription>
+      <TimeSpan>
+        <StartDate>2004-01-01T00:00:00Z</StartDate>
+        <StopDate>2004-12-31T24:00:00Z</StopDate>
+      </TimeSpan>
+      <Cadence>PT10M</Cadence>
+    </TemporalDescription>
+    <Parameter>
+      <Name>Orbit Epoch Time</Name>
+      <ParameterKey>Epoch</ParameterKey>
+      <Description>Number of milliseconds since the CDF epoch</Description>
+      <Units>ms</Units>
+      <UnitsConversion>1e-3&gt;s</UnitsConversion>
+      <ValidMin>01-Jul-1992 00:00:00.000</ValidMin>
+      <ValidMax>31-Dec-2020 23:59:59.000</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Orbit PB5 Time</Name>
+      <ParameterKey>Time_PB5</ParameterKey>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Year</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <Units>year</Units>
+          <ValidMin>1992</ValidMin>
+          <ValidMax>2020</ValidMax>
+          <FillValue>-2147483648</FillValue>
+        </Element>
+        <Element>
+          <Name>Day of Year (Jan 1 = day 1)</Name>
+          <Component>I</Component>
+          <Index>2</Index>
+          <Units>day</Units>
+          <ValidMin>1</ValidMin>
+          <ValidMax>366</ValidMax>
+          <FillValue>-2147483648</FillValue>
+        </Element>
+        <Element>
+          <Name>Elapsed ms of day</Name>
+          <Component>I</Component>
+          <Index>3</Index>
+          <Units>ms</Units>
+          <UnitsConversion>1e-3&gt;s</UnitsConversion>
+          <ValidMin>0</ValidMin>
+          <ValidMax>86399000</ValidMax>
+          <FillValue>-2147483648</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>GCI Cartesian Position</Name>
+      <ParameterKey>GCI_POS</ParameterKey>
+      <Description>Spacecraft position vector in GCI coordinates</Description>
+      <Units>km</Units>
+      <UnitsConversion>1e3&gt;m</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>X GCI</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Y GCI</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Z GCI</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>GCI Cartesian Velocity</Name>
+      <ParameterKey>GCI_VEL</ParameterKey>
+      <Description>Spacecraft orbital velocity vector in GCI coordinates</Description>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>vx GCI</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>vy GCI</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>vz GCI</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Velocity</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>GSE Cartesian Position</Name>
+      <ParameterKey>GSE_POS</ParameterKey>
+      <Description>Spacecraft position vector in GSE coordinates</Description>
+      <Units>km</Units>
+      <UnitsConversion>1e3&gt;m</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>X GSE</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Y GSE</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Z GSE</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>GSE Cartesian Velocity</Name>
+      <ParameterKey>GSE_VEL</ParameterKey>
+      <Description>Spacecraft orbital velocity vector in GSE coordinates</Description>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>vx GSE</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>vy GSE</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>vz GSE</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Velocity</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>GSM Cartesian Position</Name>
+      <ParameterKey>GSM_POS</ParameterKey>
+      <Description>Spacecraft position vector in GSM coordinates</Description>
+      <Units>km</Units>
+      <UnitsConversion>1e3&gt;m</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSM</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>X GSM</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Y GSM</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Z GSM</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>GSM Cartesian Velocity</Name>
+      <ParameterKey>GSM_VEL</ParameterKey>
+      <Description>Spacecraft orbital velocity vector in GSM coordinates</Description>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSM</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>vx GSM</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>vy GSM</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>vz GSM</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Velocity</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>GCI Sun Postion Vector</Name>
+      <ParameterKey>SUN_VECTOR</ParameterKey>
+      <Description>Sun position vector in GCI coordinates</Description>
+      <Units>km</Units>
+      <UnitsConversion>1e3&gt;m</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Sun X GCI</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-1.6E8</ValidMin>
+          <ValidMax>1.6E8</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Sun Y GCI</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-1.6E8</ValidMin>
+          <ValidMax>1.6E8</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Sun Z GCI</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-1.6E8</ValidMin>
+          <ValidMax>1.6E8</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>HEC Cartesian Position</Name>
+      <ParameterKey>HEC_POS</ParameterKey>
+      <Description>Spacecraft position vector in HEC coordinates</Description>
+      <Units>km</Units>
+      <UnitsConversion>1e3&gt;m</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>X HEC</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Y HEC</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Z HEC</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-1800000.0</ValidMin>
+          <ValidMax>1800000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>HEC Cartesian Velocity</Name>
+      <ParameterKey>HEC_VEL</ParameterKey>
+      <Description>Spacecraft orbital velocity vector in HEC coordinates</Description>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>vx HEC</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>vy HEC</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>vz HEC</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-12.0</ValidMin>
+          <ValidMax>12.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Velocity</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Carrington Rotation Number</Name>
+      <ParameterKey>CRN_EARTH</ParameterKey>
+      <Description>Carrington rotation number of the Earth</Description>
+      <ValidMin>1857</ValidMin>
+      <ValidMax>2239</ValidMax>
+      <FillValue>-2147483648</FillValue>
+      <Support>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Heliographic Long of the Earth</Name>
+      <ParameterKey>LONG_EARTH</ParameterKey>
+      <Description>Heliographic longitude of the Earth</Description>
+      <Units>rad</Units>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Spherical</CoordinateRepresentation>
+        <CoordinateSystemName>HG</CoordinateSystemName>
+      </CoordinateSystem>
+      <ValidMin>0.0</ValidMin>
+      <ValidMax>6.283185307</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <Qualifier>DirectionAngle.AzimuthAngle</Qualifier>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Heliographic Lat of the Earth</Name>
+      <ParameterKey>LAT_EARTH</ParameterKey>
+      <Description>Heliographic latitude of the Earth</Description>
+      <Units>rad</Units>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Spherical</CoordinateRepresentation>
+        <CoordinateSystemName>HG</CoordinateSystemName>
+      </CoordinateSystem>
+      <ValidMin>-1.570796327</ValidMin>
+      <ValidMax>1.570796327</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <Qualifier>DirectionAngle.ElevationAngle</Qualifier>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Heliographic Long of Craft</Name>
+      <ParameterKey>LONG_SPACE</ParameterKey>
+      <Description>Heliographic longitude of the spacecraft</Description>
+      <Units>rad</Units>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Spherical</CoordinateRepresentation>
+        <CoordinateSystemName>HG</CoordinateSystemName>
+      </CoordinateSystem>
+      <ValidMin>0.0</ValidMin>
+      <ValidMax>6.283185307</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <Qualifier>DirectionAngle.AzimuthAngle</Qualifier>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Heliographic Lat of the Craft</Name>
+      <ParameterKey>LAT_SPACE</ParameterKey>
+      <Description>Heliographic latitude of the spacecraft</Description>
+      <Units>rad</Units>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Spherical</CoordinateRepresentation>
+        <CoordinateSystemName>HG</CoordinateSystemName>
+      </CoordinateSystem>
+      <ValidMin>-1.570796327</ValidMin>
+      <ValidMax>1.570796327</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <Qualifier>DirectionAngle.ElevationAngle</Qualifier>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+  </NumericalData>
+</Spase>

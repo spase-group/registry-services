@@ -1,6 +1,6 @@
-C:\Projects\spase\java\registry\src\filesystem\Downloader.java
-C:\Projects\spase\java\registry\src\filesystem\Render.java
-C:\Projects\spase\java\registry\src\filesystem\Resolver.java
-C:\Projects\spase\java\registry\src\filesystem\Search.java
-C:\Projects\spase\java\registry\src\filesystem\SimpleReg.java
-C:\Projects\spase\java\registry\src\filesystem\Status.java
+C:\Projects\spase\java\registry-services\src\filesystem\Downloader.java
+C:\Projects\spase\java\registry-services\src\filesystem\Render.java
+C:\Projects\spase\java\registry-services\src\filesystem\Resolver.java
+C:\Projects\spase\java\registry-services\src\filesystem\Search.java
+C:\Projects\spase\java\registry-services\src\filesystem\SimpleReg.java
+C:\Projects\spase\java\registry-services\src\filesystem\Status.java

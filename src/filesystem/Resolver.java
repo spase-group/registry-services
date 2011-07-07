@@ -1,6 +1,6 @@
 /**
- * Reads all SPASE resource description in a directory 
- * and searches each for the existance of one or more words. 
+ * Reads all SPASE resource description in a directory
+ * and searches each for the existance of one or more words.
  * Returns the descriptions for each matching
  * description packed as a single SPASE stream.
  * <p>
@@ -78,7 +78,7 @@ public class Resolver extends SmartHttpServlet
 	String	mRootPath = null;
 	String	mExtension = ".xml";
 	String	mAuthority = null;
-	
+
 	// Task options
 	String	mIdentifier = null;
 	String	mStartDate = null;
@@ -91,10 +91,10 @@ public class Resolver extends SmartHttpServlet
 	Boolean	mURLOnly = false;
 	Boolean	mCheck = false;
 	Boolean	mScan = false;
-		
+
 	// Authority map
 	HashMap<String, String> mAuthorityMap = new HashMap<String, String>();
-	
+
 	// create the Options
 	Options mAppOptions = new org.apache.commons.cli.Options();
 
@@ -106,7 +106,7 @@ public class Resolver extends SmartHttpServlet
 		mAppOptions.addOption( "d", "higher", true, "Higher Authority. The URL of the authority to pass request for unkown authorities." );
 		mAppOptions.addOption( "p", "path", true, "Path. The file system path the authority tag is converted to." );
 		mAppOptions.addOption( "a", "authority", true, "Authority. The default authority name." );
-		
+
 		mAppOptions.addOption( "i", "id", true, "ID. The resource ID to locate." );
 		mAppOptions.addOption( "t", "tree", false, "Tree. Show the items in tree mark-up at given resource ID prefix." );
 		mAppOptions.addOption( "g", "granules", false, "Granules. Return a list of URLs for Granules associated with the resource. ID" );
@@ -117,27 +117,27 @@ public class Resolver extends SmartHttpServlet
 		mAppOptions.addOption( "r", "recursive", false, "Recursive. Retrieve the description for the given resource ID and for all resources referenced in the description." );
 		mAppOptions.addOption( "c", "check", true, "Check. Check if the resource ID is known." );
 		mAppOptions.addOption( "n", "scan", true, "Scan. Scan for a list of identifiers which begin with the given prefix." );
-	}	
-	
-   /** 
+	}
+
+   /**
 	 * Command-line interface.
 	 **/
 	public static void main(String args[])
    {
    	String	outfile = null;
-   	
+
 		Resolver me = new Resolver();
 
 		me.mOut.setOut(System.out);
-		
+
 		System.out.println("Version: " + me.mVersion);
-		
+
 		if (args.length < 1) {
 			me.showHelp();
 			System.exit(1);
 		}
 
-		
+
 		CommandLineParser parser = new PosixParser();
 		try { // parse the command line arguments
          CommandLine line = parser.parse(me.mAppOptions, args);
@@ -149,7 +149,7 @@ public class Resolver extends SmartHttpServlet
 			if(line.hasOption("l")) me.loadAuthority(line.getOptionValue("l"));
 			if(line.hasOption("d")) me.mHigherAuthority = line.getOptionValue("d");
 			if(line.hasOption("a")) me.mAuthority = line.getOptionValue("a");
-			
+
 			if(line.hasOption("i")) me.mIdentifier = line.getOptionValue("i");
 			if(line.hasOption("t")) me.mTree = true;
 			if(line.hasOption("g")) me.mGranules = true;
@@ -160,19 +160,19 @@ public class Resolver extends SmartHttpServlet
 			if(line.hasOption("r")) me.mRecursive = true;
 			if(line.hasOption("c")) me.mCheck = true;
 			if(line.hasOption("n")) me.mScan = true;
-			
+
 			if(outfile != null) {
 				me.mOut.setOut(new PrintStream(outfile));
 			}
 			if(me.mAuthority != null && me.mRootPath != null) me.mAuthorityMap.put(me.mAuthority, me.mRootPath);
-		
+
 			me.doAction();
-			
+
 			// Process other command line areguments
-			for(String p : line.getArgs()) { 
+			for(String p : line.getArgs()) {
 				if(me.mVerbose) System.out.println("Processing: " + p);
 			}
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -190,7 +190,7 @@ public class Resolver extends SmartHttpServlet
 		System.out.println("Usage: java " + getClass().getName() + " [options] [file...]");
 		System.out.println("");
 		System.out.println("Options:");
-		
+
 		// automatically generate the help statement
 		HelpFormatter formatter = new HelpFormatter();
 		formatter.printHelp(getClass().getName(), mAppOptions);
@@ -200,8 +200,8 @@ public class Resolver extends SmartHttpServlet
 		System.out.println(mAcknowledge);
 		System.out.println("");
 	}
-	
-	/** 
+
+	/**
 	 * Send the capabilities information to the current output stream.
 	 *
 	 * The capabilities is packaged in an XML formatted response document.
@@ -211,7 +211,7 @@ public class Resolver extends SmartHttpServlet
 	{
 		String param[] = {"help", "id", "tree", "granules", "startdate", "stopdate", "recursive", "size"};
 		ArrayList<String> aware = new ArrayList<String>();
-		
+
 		aware.add(":This service knows about the following authorities:");
 		Set<String> keyset = mAuthorityMap.keySet();
 		for(String key : keyset) {
@@ -221,14 +221,14 @@ public class Resolver extends SmartHttpServlet
 			aware.add(":and passes unknown authorities to:");
 			aware.add(mHigherAuthority);
 		}
-			
+
 		sendCapabilities(title, mOverview, mAcknowledge, param, aware);
 	}
 
 	/**
 	 * Initialize servlet.
 	 *
-	 * When instantiated as a servlet the framework calls this method to 
+	 * When instantiated as a servlet the framework calls this method to
 	 * perform initialization tasks.
 	 **/
    public void init()
@@ -238,17 +238,17 @@ public class Resolver extends SmartHttpServlet
 
    	String value = getServletConfig().getInitParameter("RootPath");	// Where files are stored
    	if(value != null) setRootPath(value);
-   	
+
    	value = getServletConfig().getInitParameter("AuthorityList");	// Authority list - handled locally
    	if(value != null) loadAuthority(value);
-   	
+
    	value = getServletConfig().getInitParameter("HigherAuthority");	// Where to pass unknown authorities to
    	if(value != null) setHigherAuthority(value);
-   	
+
    	value = getServletConfig().getInitParameter("Authority");	// Authority name (default)
    	if(value != null) setAuthority(value);
    }
-   
+
 
 	/**
 	 * Return all internal options to default values.
@@ -266,43 +266,43 @@ public class Resolver extends SmartHttpServlet
 		mCheck = false;
 		mScan = false;
 	}
-	
-	/** 
+
+	/**
 	 * Load options from HTTP request.
 	 *
     * @param request	the {@link HttpServletRequest} with request information.
 	 **/
-	public void setFromRequest(HttpServletRequest request) 
+	public void setFromRequest(HttpServletRequest request)
 	{
 		reset();	// Clear query parameters
-		
+
 		setIdentifier(igpp.util.Text.getValue(request.getParameter("i"), getIdentifier()));
 		setIdentifier(igpp.util.Text.getValue(request.getParameter("id"), getIdentifier()));
-		
+
 		setTree(igpp.util.Text.getValue(request.getParameter("t"), getTree()));
 		setTree(igpp.util.Text.getValue(request.getParameter("tree"), getTree()));
-		
+
 		setGranules(igpp.util.Text.getValue(request.getParameter("g"), getGranules()));
 		setGranules(igpp.util.Text.getValue(request.getParameter("granules"), getGranules()));
-		
+
 		setStartDate(igpp.util.Text.getValue(request.getParameter("b"), getStartDate()));
 		setStartDate(igpp.util.Text.getValue(request.getParameter("startdate"), getStartDate()));
-		
+
 		setStopDate(igpp.util.Text.getValue(request.getParameter("e"), getStopDate()));
 		setStopDate(igpp.util.Text.getValue(request.getParameter("stopdate"), getStopDate()));
-		
+
 		setSizeOnly(igpp.util.Text.getValue(request.getParameter("s"), getSizeOnly()));
 		setSizeOnly(igpp.util.Text.getValue(request.getParameter("size"), getSizeOnly()));
-		
+
 		setURLOnly(igpp.util.Text.getValue(request.getParameter("u"), getURLOnly()));
 		setURLOnly(igpp.util.Text.getValue(request.getParameter("url"), getURLOnly()));
-		
+
 		setRecursive(igpp.util.Text.getValue(request.getParameter("r"), getRecursive()));
 		setRecursive(igpp.util.Text.getValue(request.getParameter("recursive"), getRecursive()));
-		
+
 		setCheck(igpp.util.Text.getValue(request.getParameter("c"), getCheck()));
 		setCheck(igpp.util.Text.getValue(request.getParameter("check"), getCheck()));
-		
+
 		setScan(igpp.util.Text.getValue(request.getParameter("n"), getScan()));
 		setScan(igpp.util.Text.getValue(request.getParameter("scan"), getScan()));
 	}
@@ -312,15 +312,15 @@ public class Resolver extends SmartHttpServlet
 	 *
 	 * URL parameters do not include recusion flags.
 	 *
-	 * @param id the resource identifier value. 
+	 * @param id the resource identifier value.
 	 *
 	 * @return options formatted as URL parameters
-	 **/	
+	 **/
 	 public String getURLParameters(String id)
 	 {
 	 	String	delim = "?";
 	 	String	param = "";
-	 	
+
 	 	if(id != null) { param += delim + "i=" + id; delim = "&"; }
 	 	if(mTree) { param += delim + "t=yes"; delim = "&"; }
 	 	if(mGranules) { param += delim + "g=yes"; delim = "&"; }
@@ -329,29 +329,29 @@ public class Resolver extends SmartHttpServlet
 	 	if(mSizeOnly) { param += delim + "s=yes"; delim = "&"; }
 	 	if(mCheck) { param += delim + "c=yes"; delim = "&"; }
 	 	if(mScan) { param += delim + "n=yes"; delim = "&"; }
-	 	
+
 	 	// Add random value parameter to avoid web caching
-	 	param += delim + "cid=" + getCID(); delim = "&"; 
-	 	
+	 	param += delim + "cid=" + getCID(); delim = "&";
+
 	 	return param;
 	 }
-	 
-	/** 
-	 * Load an Authority lookup table. 
+
+	/**
+	 * Load an Authority lookup table.
 	 *
 	 * A table consists of rows composed of
-	 * authority name and file path seperated by whitespace. 
+	 * authority name and file path seperated by whitespace.
 	 * Lines beginning with "#" are considered comments.
 	 **/
 	public void loadAuthority(String pathname)
 	{
 		try {
 			pathname = getRealPath("conf", pathname);
-			
+
 			File file = new File(pathname);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String	buffer;
-			
+
 			// Load authority info
 			while((buffer = reader.readLine()) != null) {
 				if(mVerbose) System.out.println(buffer);
@@ -360,13 +360,13 @@ public class Resolver extends SmartHttpServlet
 				if(part.length < 2) continue;
 				mAuthorityMap.put(part[0].trim(), getRealPath("", part[1].trim()));
 			}
-			
+
 			reader.close();
 		} catch(Exception e) {
 			System.out.println(getClass().getName() + ":" + e.getMessage());
 		}
 	}
-	
+
    /**
     * Process a HTTP post request.
     *
@@ -386,7 +386,7 @@ public class Resolver extends SmartHttpServlet
 			throw new ServletException(e);
 		}
 	}
-   
+
    /**
     * Process a HTTP get request.
     *
@@ -407,7 +407,7 @@ public class Resolver extends SmartHttpServlet
 			throw new ServletException(e);
 		}
 	}
-	                
+
    /**
     * Process a HTTP request.
     *
@@ -421,22 +421,22 @@ public class Resolver extends SmartHttpServlet
 		throws Exception
 	{
 		setFromRequest(request);
-		
+
 		// response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml; charset=UTF-8");
-		
+
 		// get ready to write response
 		mOut.setOut(response.getWriter());
-		
+
 		if(request.getParameter("h") != null) { // Send self documentation
 			response.setContentType("text/html");
-			sendCapabilities(request.getRequestURI()); 
-			return; 
+			sendCapabilities(request.getRequestURI());
+			return;
 		}
-		
+
 		doAction();
 	}
-	
+
    /**
     * Process a HTTP request.
     *
@@ -448,16 +448,16 @@ public class Resolver extends SmartHttpServlet
 	{
 		if(mTree) { getTreeInfo(mIdentifier); return; }
 		if(mGranules) { getGranules(mIdentifier, mStartDate, mStopDate, mRecursive, mURLOnly, mSizeOnly); return; }
-		if(mIdentifier != null) { 
+		if(mIdentifier != null) {
 			if(mCheck) { checkID(mIdentifier); }
 			else {
 				if(mScan) { getIDList(mIdentifier); }
 			   else { getDescription(mIdentifier); }
 			}
 		}
-	}		
-		
-	/** 
+	}
+
+	/**
 	 * Determine of a resource ID is known.
 	 *
 	 * Performs a quick check for the existance of a resource with the passed ID.
@@ -468,20 +468,20 @@ public class Resolver extends SmartHttpServlet
    	throws Exception
 	{
 		ArrayList<String> processed = new ArrayList<String>();
-		
+
 		mOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		
+
 		String path = translate(id);
-		
-		mOut.println("<Response>");			
+
+		mOut.println("<Response>");
 		if(path != null) {	// Found resource and transform if requested
 		   path += ".xml";	// File must have ".xml" extension
 		   File file = new File(path);
 			if(file.exists()) {
-				mOut.println("<Known>" + id + "</Known>");			
+				mOut.println("<Known>" + id + "</Known>");
 			} else {
-				mOut.println("<Unknown>" + id + "</Unknown>");			
-				mOut.println("<Message>Unable to locate within known authority.</Message>");			
+				mOut.println("<Unknown>" + id + "</Unknown>");
+				mOut.println("<Message>Unable to locate within known authority.</Message>");
 			}
 		} else {
 			if(mHigherAuthority != null) {	// Pass request on
@@ -489,16 +489,16 @@ public class Resolver extends SmartHttpServlet
 			   String url = mHigherAuthority + getURLParameters(id);
 				URL urlSource = new URL(url);
 				URLConnection con = urlSource.openConnection();
-				InputStream stream = con.getInputStream();		
+				InputStream stream = con.getInputStream();
 				streamContent(stream, false);
 			} else {
-				mOut.println("<Message>Unable to locate authority.</Message>");			
+				mOut.println("<Message>Unable to locate authority.</Message>");
 			}
 		}
-		mOut.println("</Response>");			
-	}		
+		mOut.println("</Response>");
+	}
 
-	/** 
+	/**
 	 * Retrieve and stream a full resource description from the repository.
 	 *
 	 * @param id	the identifier of the resource description to retrieve.
@@ -507,7 +507,7 @@ public class Resolver extends SmartHttpServlet
    	throws Exception
 	{
 		ArrayList<String> processed = new ArrayList<String>();
-		
+
 		mOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		if(mRecursive) mOut.println("<Package>");	// Multiple SPASE segments
 		try {
@@ -516,12 +516,12 @@ public class Resolver extends SmartHttpServlet
 			mOut.println("<Message>Unable to resolve id " + id + "</Message>");
 		}
 		if(mRecursive) mOut.println("</Package>");
-		
+
 		processed.clear();
 		processed = null;
-	}		
-		
-	/** 
+	}
+
+	/**
 	 * Retrieve and stream a full resource description from the repository.
 	 *
 	 * @param id	the identifier of the resource description to retrieve.
@@ -529,19 +529,19 @@ public class Resolver extends SmartHttpServlet
 	public void getDescription(String id, boolean recursive, ArrayList<String> processed)
    	throws Exception
 	{
-		// Resource Description 
+		// Resource Description
 		String path = translate(id);
 		ArrayList<String>	idList = null;
-		
+
 		processed.add(id);
-		
+
 		if(path != null) {	// Found resource and transform if requested
 		   path += ".xml";	// File must have ".xml" extension
 		   File file = new File(path);
 			if(file.exists()) {
 				idList = streamContent(path, recursive);
 			} else {
-				mOut.println("<Message>Unable to locate resource within known authority. Looking for: " + id + "</Message>");			
+				mOut.println("<Message>Unable to locate resource within known authority. Looking for: " + id + "</Message>");
 			}
 		} else {
 			if(mHigherAuthority != null) {	// Pass request on
@@ -549,22 +549,22 @@ public class Resolver extends SmartHttpServlet
 			   String url = mHigherAuthority + getURLParameters(id);
 				URL urlSource = new URL(url);
 				URLConnection con = urlSource.openConnection();
-				InputStream stream = con.getInputStream();		
+				InputStream stream = con.getInputStream();
 				idList = streamContent(stream, recursive);
 			} else {
-				mOut.println("<Message>Unable to locate authority for: " + id + "</Message>");			
+				mOut.println("<Message>Unable to locate authority for: " + id + "</Message>");
 			}
 		}
-		// Process items in idList 
+		// Process items in idList
 		if(idList != null) {
 			for(String item : idList) {
 				mOut.println("");
 				if( ! igpp.util.Text.isInList(item, processed)) { getDescription(item, recursive, processed);  }
 			}
 		}
-	}		
-		
-	/** 
+	}
+
+	/**
 	 * Get the list of granules associated with the given reource ID.
 	 * which overlap a time interval.
 	 *
@@ -590,20 +590,20 @@ public class Resolver extends SmartHttpServlet
 			Calendar stopCal = igpp.util.Date.parseISO8601(stopDate, true);
 			stopDate = igpp.util.Date.getISO8601DateString(stopCal);
 		}
-		
+
 		mOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		mOut.println("<Response>");
-		
+
 		// Description
 		ArrayList<String> processed = new ArrayList<String>();
-		
+
 		// Granules related to a resource
 		String zipMessage = "";
 		ArrayList<String> ackList = new ArrayList<String>();
-		
+
 		String path = translate(id);
 		if(path == null) {
-			mOut.println("<Message>Unable to resolver id: " + id + "</Message>");
+			mOut.println("<Message>Unable to resolve id: " + id + "</Message>");
 			mOut.println("</Response>");
 			return;
 		}
@@ -611,7 +611,7 @@ public class Resolver extends SmartHttpServlet
 		Document doc = XMLGrep.parse(path);
 		ArrayList<Pair> docIndex = XMLGrep.makeIndex(doc, "");
 		ackList = XMLGrep.getValues(docIndex, ".*/Acknowledgement");
-		
+
 		// Switch data resource types to "Granule"
 		String granuleID = id;
 		granuleID = granuleID.replace("/NumericalData/", "/Granule/");
@@ -620,17 +620,17 @@ public class Resolver extends SmartHttpServlet
 
 		path = translate(granuleID);
 		if(path == null) {
-			mOut.println("<Message>Invalid resource id: " + id + "</Message>");		
+			mOut.println("<Message>Invalid resource id: " + id + "</Message>");
 		} else {	// Find resource and transform if requested
 			mOut.println("<StartDate>" + (startDate == null ? "" : startDate) + "</StartDate>");
 			mOut.println("<StopDate>" + (stopDate == null ? "" : stopDate) + "</StopDate>");
 
 			for(String item : ackList) mOut.println("<Acknowledgement>" + item + "</Acknowledgement>");
-			
+
 			if(sendDesc) getDescription(id, true, processed);
 
 			long bytes = 0;
-			long totalBytes = 0;			
+			long totalBytes = 0;
 			ArrayList<ArrayList<String>> granules = new ArrayList<ArrayList<String>>();
 			ArrayList<String> matches = new ArrayList<String>();
 			scanDeepPath(path, matches);
@@ -639,14 +639,14 @@ public class Resolver extends SmartHttpServlet
 				if(igpp.util.File.isDirectory(item)) continue;	// Skip folders
 				doc = XMLGrep.parse(item);
 				docIndex = XMLGrep.makeIndex(doc, "");
-				
+
 				// Check if correct parent
 				String gParentID = XMLGrep.getFirstValue(docIndex, ".*/ParentID", "");
 				System.out.println("ParentID: " + gParentID);
 				System.out.println("id: " + id);
-				
+
 				if( ! igpp.util.Text.isMatch(gParentID, id)) continue;	// Does not share parent
-				
+
 				// Get attributes
 				String gStartDate = XMLGrep.getFirstValue(docIndex, ".*/StartDate", null);
 				String gStopDate = XMLGrep.getFirstValue(docIndex, ".*/StopDate", null);
@@ -677,7 +677,7 @@ public class Resolver extends SmartHttpServlet
 							// Value is not in properly format - ignore.
 						}
 					}
-					
+
 					totalBytes += bytes;
 					// Add record that consists of: StartDate, StopDate, PathName, URL, Bytes
 					ArrayList<String> record = new ArrayList<String>();
@@ -689,10 +689,10 @@ public class Resolver extends SmartHttpServlet
 					granules.add(record);
 				}
 			}
-			
+
 			// Sort results on StartDate (Field = 0)
 			Collections.sort(granules, new StringListComparator(0, StringListComparator.SortAscending));
-			
+
 			// Write sorted list
 			if(sendSize) mOut.println("<Size>" + igpp.util.Text.toUnitizedBytes(totalBytes) + "</Size>");
 			for(ArrayList<String> item : granules) {
@@ -707,11 +707,11 @@ public class Resolver extends SmartHttpServlet
 				}
 			}
 		}
-			long totalBytes = 0;			
+			long totalBytes = 0;
 		mOut.println("</Response>");
 	}
-	
-	/** 
+
+	/**
 	 * Get the tree information at the Resource ID location.
 	 * The Resource ID can be a partial ID. All items at that
 	 * location in the path will be returned.
@@ -726,14 +726,14 @@ public class Resolver extends SmartHttpServlet
 	{
 		mOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		mOut.println("<Response>");
-		
+
 		if(id == null) { 	// Send known authority list
 			Set<String> keyset = mAuthorityMap.keySet();
 			ArrayList<String> authList = new ArrayList<String>();
 			for(String key : keyset) { authList.add(key); }
 			Collections.sort(authList);
 			for(String key : authList) {
-				mOut.println("<node " 
+				mOut.println("<node "
 					+ " id=\"" + "spase://" + key + "\""
 					+ " text=\"" + key + "\""
 					+ " name=\"" + key + "\""
@@ -742,19 +742,19 @@ public class Resolver extends SmartHttpServlet
 			mOut.println("</Response>");
 			return;
 		}
-		
+
 		// Translate ID
-	
+
 		String path = translate(id);
 		if(path == null) {	// Send known authority list
-			mOut.println("<Message>Invalid resource id: " + id + "</Message>");		
+			mOut.println("<Message>Invalid resource id: " + id + "</Message>");
 		} else {	// Send file lists
 			ArrayList<String> matches = scanPath(path);
 			Collections.sort(matches);
 			for(String name : matches) {
 				File test = new File(name);
 				if(test.isDirectory()) {	// Node
-					mOut.println("<node " 
+					mOut.println("<node "
 						+ " id=\"" + igpp.util.Text.concatPath(id, test.getName(), "/") + "\""
 						+ " text=\"" + test.getName() + "\""
 						+ " name=\"" + test.getName() + "\""
@@ -771,7 +771,7 @@ public class Resolver extends SmartHttpServlet
 		mOut.println("</Response>");
 	}
 
-	/** 
+	/**
 	 * Get the identifiers of every resource starting at a Resource ID location.
 	 * The Resource ID can be a partial ID. All items at that
 	 * location in the path and below will be returned.
@@ -786,12 +786,12 @@ public class Resolver extends SmartHttpServlet
 	{
 		mOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		mOut.println("<Response>");
-		
+
 		// Translate ID
-	
+
 		String path = translate(id);
 		if(path == null) {	// Send known authority list
-			mOut.println("<Message>Invalid resource id: " + id + "</Message>");		
+			mOut.println("<Message>Invalid resource id: " + id + "</Message>");
 		} else {	// Send file lists
 			ArrayList<String> matches = new ArrayList<String>();
 			scanDeepPath(path, matches);
@@ -808,7 +808,7 @@ public class Resolver extends SmartHttpServlet
 		}
 		mOut.println("</Response>");
 	}
-		
+
 	/**
 	 * Translate a resource ID into a local path reference.
 	 * If the path can not be translated then null is returned.
@@ -821,24 +821,25 @@ public class Resolver extends SmartHttpServlet
 	{
 		String path = null;
 		if(id == null) return null;
-		
+
 		Set<String> keyset = mAuthorityMap.keySet();
 		for(String key : keyset) {
 			if(id.startsWith("spase://" + key)) {	// Replace with path
 				path = mAuthorityMap.get(key) + id.substring(8 + key.length());
+				break;
 			}
 		}
-		
+
 		return path;
 	}
-	
-	/** 
+
+	/**
 	 * Recusively determine all named files and folders at a path.
 	 *
 	 * If the path points to a folder, then all subfolders and files
 	 * are determined. If the path is to a file, then the filename is returned.
-	 * 
-	 * @param path the path to scan. 
+	 *
+	 * @param path the path to scan.
 	 *
 	 * @return an {@link ArrayList} of {@link String} values of paths to the files and folders found.
 	 * if the path is a folder, then an empty list is returned.
@@ -847,28 +848,28 @@ public class Resolver extends SmartHttpServlet
 		throws Exception
 	{
 		ArrayList<String> matches = new ArrayList<String>();
-		
+
 		matches = scanPath(path);
 		if(matches.isEmpty()) return list.size();	// all done
-		
+
 		list.addAll(matches);
-		
+
 		// Scan matches which are directories
 		for(String item : matches) {
 		   File filePath = new File(item);
 		   if(filePath.isDirectory()) { scanDeepPath(item, list); }
 		}
-		
+
 		return list.size();
 	}
-	
-	/** 
+
+	/**
 	 * Determine all named files and folders at a path.
 	 *
 	 * If the path points to a folder, then all subfolders and files
 	 * are determined. If the path is to a file, then the filename is returned.
-	 * 
-	 * @param path the path to scan. 
+	 *
+	 * @param path the path to scan.
 	 *
 	 * @return an {@link ArrayList} of {@link String} values of paths to the files and folders found.
 	 * if the path is a folder, then an empty list is returned.
@@ -877,20 +878,20 @@ public class Resolver extends SmartHttpServlet
 		throws Exception
 	{
 		ArrayList<String> matches = new ArrayList<String>();
-		
+
 		if(path == null) return matches;
-		
+
 		// File name filter
 	   String[] list = new String[1];
 	   list[0] = null;
-	 
+
 	   File filePath = new File(path);
 	   if(filePath.isDirectory()) {
-			list = filePath.list(new FilenameFilter()	
-		   	{ 
+			list = filePath.list(new FilenameFilter()
+		   	{
 		   		// Accept all files that do not begin with a "."
-		   		public boolean accept(File path, String name) { return ! name.startsWith("."); } 
-		   	} 
+		   		public boolean accept(File path, String name) { return ! name.startsWith("."); }
+		   	}
 		   	);
 		   for(String item: list) {
 		   	if(item != null) matches.add(igpp.util.Text.concatPath(path, item));
@@ -898,13 +899,13 @@ public class Resolver extends SmartHttpServlet
 	   } else {
 	   	if(filePath.exists()) matches.add(path);
 	   }
-	   
+
 	   return matches;
 	}
-	
+
 	/**
 	 * Stream content between the <Spase>/</Spase> tags
-	 * 
+	 *
 	 * The content of a SPASE XML document is sent to the output stream.
 	 *
 	 * @param pathname the pathname of the file to scan and stream.
@@ -914,10 +915,10 @@ public class Resolver extends SmartHttpServlet
 	{
 		streamContent(pathname, false);
 	}
-	
+
 	/**
 	 * Stream content between the <Spase>/</Spase> tags
-	 * 
+	 *
 	 * The content of a SPASE XML document is sent to the output stream.
 	 * The version tag can optionally be striped from the stream.
 	 *
@@ -930,19 +931,19 @@ public class Resolver extends SmartHttpServlet
 		throws Exception
 	{
 		ArrayList<String>	idList = null;
-		
+
 		try {
 			idList = streamContent(new FileInputStream(pathname), getID);
 		} catch(Exception e) {
 			// mOut.println("<Message>" + e.getMessage() + "</Message>");
 		}
-		
+
 		return idList;
 	}
-	
+
 	/**
 	 * Stream content between the <Spase>/</Spase> tags
-	 * 
+	 *
 	 * The content of a SPASE XML document is sent to the output stream.
 	 * Only the content enclosed in the <Spase> tags are streamed.
 	 *
@@ -958,10 +959,10 @@ public class Resolver extends SmartHttpServlet
 		String	buffer;
 		BufferedReader reader = null;
 		ArrayList<String>	idList = new ArrayList<String>();
-	
+
 		try {
 			reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
-			
+
 			// Search for word
 			while((buffer = reader.readLine()) != null) {
 				if(on) {	// Check for end tag
@@ -977,14 +978,14 @@ public class Resolver extends SmartHttpServlet
 		} finally {
 			if(reader != null) reader.close();
 		}
-		
+
 		return idList;
 	}
-	
+
 	/**
 	 * Read content between the <Spase>/</Spase> tags into a String
 	 *
-	 * The content of a SPASE XML document is processed and streamed to 
+	 * The content of a SPASE XML document is processed and streamed to
 	 * a String. The version tag can optionally be striped from the stream.
 	 *
 	 * @param pathname the pathname of the file to scan and stream.
@@ -998,11 +999,11 @@ public class Resolver extends SmartHttpServlet
 		String	buffer;
 		BufferedReader reader = null;
 		StringBuffer	content = new StringBuffer();
-		
+
 		try {
 			File file = new File(pathname);
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-			
+
 			// Search for word
 			while((buffer = reader.readLine()) != null) {
 				if(on) {	// Check for end tag
@@ -1014,12 +1015,12 @@ public class Resolver extends SmartHttpServlet
 		} catch(Exception e) {
 		} finally {
 			if(reader != null) reader.close();
-		}	
-			
+		}
+
 		return new String(content);
 	}
-	
-	
+
+
 	/**
 	 * Stream file contents to output.
 	 *
@@ -1032,11 +1033,11 @@ public class Resolver extends SmartHttpServlet
 	{
 		String	buffer;
 		BufferedReader reader = null;
-	
+
 		try {
 			File file = new File(pathname);
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-			
+
 			// Search for word
 			while((buffer = reader.readLine()) != null) {
 				mOut.println(buffer);
@@ -1044,9 +1045,9 @@ public class Resolver extends SmartHttpServlet
 		} catch(Exception e) {
 		} finally {
 			if(reader != null) reader.close();
-		}	
+		}
 	}
-	
+
 	/**
 	 * Extract content between XML tags.
 	 *
@@ -1054,72 +1055,72 @@ public class Resolver extends SmartHttpServlet
 	 *
 	 * @return the content between the tags.
 	 **/
-	public String getTagContent(String tagline) 
+	public String getTagContent(String tagline)
 	{
 		int n;
-		n = tagline.indexOf('>');	
+		n = tagline.indexOf('>');
 		if(n != -1) tagline = tagline.substring(n+1);
-		n = tagline.lastIndexOf('<');	
+		n = tagline.lastIndexOf('<');
 		if(n != -1) tagline = tagline.substring(0, n);
 
-		return tagline;		
+		return tagline;
 	}
-	
+
 	public Option getAppOption(String opt) {	return mAppOptions.getOption(opt);	}
 
 	public void setI(String value) { setIdentifier(value); }
 	public void setIdentifier(String value) { mIdentifier = value; }
 	public String getIdentifier() { return mIdentifier; }
-	
+
 	public void setT(String value) { setTree(value); }
 	public void setTree(String value) { mTree = igpp.util.Text.isTrue(value); }
 	public void setTree(boolean value) { mTree = value; }
 	public Boolean getTree() { return mTree; }
-	
+
 	public void setG(String value) { setGranules(value); }
 	public void setGranules(String value) { mGranules = igpp.util.Text.isTrue(value); }
 	public void setGranules(boolean value) { mGranules = value; }
 	public Boolean getGranules() { return mGranules; }
-	
+
 	public void setB(String value) { setStartDate(value); }
 	public void setStartDate(String value) { if(igpp.util.Text.isEmpty(value)) return; mStartDate = value; }
 	public String getStartDate() { return mStartDate; }
-	
+
 	public void setE(String value) { setStopDate(value); }
 	public void setStopDate(String value) { if(igpp.util.Text.isEmpty(value)) return; mStopDate = value; }
 	public String getStopDate() { return mStopDate; }
-	
+
 	public void setS(String value) { setSizeOnly(value); }
 	public void setSizeOnly(String value) { mSizeOnly = igpp.util.Text.isTrue(value); }
 	public void setSizeOnly(boolean value) { mSizeOnly = value; }
 	public Boolean getSizeOnly() { return mSizeOnly; }
-	
+
 	public void setU(String value) { setSizeOnly(value); }
 	public void setURLOnly(String value) { mURLOnly = igpp.util.Text.isTrue(value); }
 	public void setURLOnly(boolean value) { mURLOnly = value; }
 	public Boolean getURLOnly() { return mURLOnly; }
-	
+
 	public void setR(String value) { setRecursive(value); }
 	public void setRecursive(String value) { mRecursive = igpp.util.Text.isTrue(value); }
 	public void setRecursive(boolean value) { mRecursive = value; }
 	public Boolean getRecursive() { return mRecursive; }
-	
+
 	public void setC(String value) { setCheck(value); }
 	public void setCheck(String value) { mCheck = igpp.util.Text.isTrue(value); }
 	public void setCheck(boolean value) { mCheck = value; }
 	public Boolean getCheck() { return mCheck; }
-	
+
 	public void setN(String value) { setScan(value); }
 	public void setScan(String value) { mScan = igpp.util.Text.isTrue(value); }
 	public void setScan(boolean value) { mScan = value; }
 	public Boolean getScan() { return mScan; }
-	
+
 	private void setRootPath(String value) { mRootPath = value; }
 	public String getRootPath() { return mRootPath; }
-	
+
 	private void setAuthority(String value) { mAuthority = value; }
 	public String getAuthority() { return mAuthority; }
-	
+
 	private void setHigherAuthority(String value) { mHigherAuthority = value; }
 	public String getHigherAuthority() { return mHigherAuthority; }
 }

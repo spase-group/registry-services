@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spase xmlns="http://www.spase-group.org/data/schema">
+    <Version>2.0.1</Version>
+    <NumericalData>
+        <ResourceID>spase://Example/NumericalData/Geotail/Propagated/PT1M</ResourceID>
+        <ResourceHeader>
+            <ResourceName>Geotail MGF CPI 1-min field and plasma data at bow shock nose</ResourceName>
+            <AlternateName>Geotail at BSN</AlternateName>
+            <ReleaseDate>2009-08-01T00:00:00</ReleaseDate>
+            <Description>An example subset of the solar wind magnetic field and plasma data at 1-min resolution 
+created from Geotail data shifted to the Earth's bow shock nose (BSN).</Description>
+            <Acknowledgement>We acknowledge T. Nagai of the MGF team, L. Frank 
+and W. Paterson of the CPI team and J. King and N. Papitashvili of NASA/SPDF and ADNET 
+who created this product.</Acknowledgement>
+            <Contact>
+                <PersonID>spase://Example/Person/Joseph.H.King</PersonID>
+                <Role>DataProducer</Role>
+            </Contact>
+            <Contact>                
+                <PersonID>spase://Example/Person/Natalia.E.Papitashvili</PersonID>
+                <Role>DataProducer</Role>
+            </Contact>
+            <InformationURL>
+                <Name>Readme at nssdcftp</Name>
+                <URL>ftp://nssdcftp.gsfc.nasa.gov/spacecraft_data/omni/high_res_omni/sc_specific/00readme.txt
+</URL>
+            </InformationURL>
+        </ResourceHeader>
+        <AccessInformation>
+            <RepositoryID>spase://Example/Repository/NASA/GSFC/SPDF</RepositoryID>
+            <Availability>Online</Availability>
+            <AccessRights>Open</AccessRights>
+            <AccessURL>
+                <Name>OMNIWeb</Name>
+                <URL>http://omniweb.gsfc.nasa.gov/form/sc_merge_min1.html</URL>
+                <Description>OMNIWeb, 1-min Geotail</Description>
+            </AccessURL>
+            <Format>Text</Format>
+            <Encoding>None</Encoding>
+        </AccessInformation>
+        <AccessInformation>
+            <RepositoryID>spase://Example/Repository/NASA/GSFC/SPDF</RepositoryID>
+            <Availability>Online</Availability>
+            <AccessRights>Open</AccessRights>
+            <AccessURL>
+                <Name>nssdcftp</Name>
+                <URL>ftp://nssdcftp.gsfc.nasa.gov/spacecraft_data/omni/high_res_omni/sc_specific</URL>
+                <Description>FTP path at SPDF/NSSDC</Description>
+            </AccessURL>
+            <Format>Text</Format>
+            <Encoding>None</Encoding>
+            <DataExtent>
+                 <Quantity>129</Quantity>
+                 <Units>MB</Units>
+                 <Per>P1Y</Per>
+            </DataExtent>
+        </AccessInformation>
+        <ProviderResourceName>Geotail MGF CPI Data at BSN</ProviderResourceName>
+        <InstrumentID>spase://Example/Instrument/Geotail/MGF</InstrumentID>
+        <InstrumentID>spase://Example/Instrument/Geotail/CPI</InstrumentID>
+        <MeasurementType>MagneticField</MeasurementType>
+        <MeasurementType>ThermalPlasma</MeasurementType>
+        <TemporalDescription>
+            <TimeSpan>
+                 <StartDate>2004-01-01T00:00:00Z</StartDate>
+                 <StopDate>2004-12-31T24:00:00Z</StopDate>
+            </TimeSpan>
+            <Cadence>PT1M</Cadence>
+        </TemporalDescription>
+        <ObservedRegion>Heliosphere.NearEarth</ObservedRegion>
+        <Parameter>
+            <Name>Magnetic field vector, GSE</Name>
+            <Description>Magnetic field vector, GSE</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>nT</Units>
+            <CoordinateSystem>
+                <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+                <CoordinateSystemName>GSE</CoordinateSystemName>
+            </CoordinateSystem>
+            <Structure>
+                <Size>3</Size>
+                <Description>Magnetic field vector, GSE</Description>
+                <Element>
+                     <Name>Bx(GSE)</Name>
+                     <Index>1</Index>
+                     <ParameterKey>Column13</ParameterKey>
+                     <Units>nT</Units>
+                </Element>
+                <Element>
+                     <Name>By(GSE)</Name>
+                     <Index>2</Index>
+                     <ParameterKey>Column14</ParameterKey>
+                     <Units>nT</Units>
+                </Element>
+                <Element>
+                     <Name>Bz(GSE)</Name>
+                     <Index>3</Index>
+                     <ParameterKey>Column15</ParameterKey>
+                     <Units>nT</Units>
+                </Element>
+            </Structure>
+            <Field>
+                <Qualifier>Component</Qualifier>
+                <Qualifier>Average</Qualifier>
+                <FieldQuantity>Magnetic</FieldQuantity>
+            </Field>
+        </Parameter>
+        <Parameter>
+            <Name>Magnetic field vector, GSM</Name>
+            <Description>Magnetic field vector, GSM</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>nT</Units>
+            <CoordinateSystem>
+                <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+                <CoordinateSystemName>GSM</CoordinateSystemName>
+            </CoordinateSystem>
+            <Structure>
+                <Size>3</Size>
+                <Description>Magnetic field vector, GSM</Description>
+                <Element>
+                     <Name>Bx(GSM)</Name>
+                     <Index>1</Index>
+                     <ParameterKey>Column13</ParameterKey>
+                     <Units>nT</Units>
+                </Element>
+                <Element>
+                     <Name>By(GSM)</Name>
+                     <Index>2</Index>
+                     <ParameterKey>Column16</ParameterKey>
+                     <Units>nT</Units>
+                </Element>
+                <Element>
+                     <Name>Bz(GSM)</Name>
+                     <Index>3</Index>
+                     <ParameterKey>Column17</ParameterKey>
+                     <Units>nT</Units>
+                </Element>
+            </Structure>
+            <Field>
+                <Qualifier>Component</Qualifier>
+                <Qualifier>Average</Qualifier>
+                <FieldQuantity>Magnetic</FieldQuantity>
+            </Field>
+        </Parameter>
+        <Parameter>
+            <Name>Magnetic field magnitude</Name>
+            <ParameterKey>Column12</ParameterKey>
+            <Description>Magnetic field magnitude</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>nT</Units>
+            <Field>
+                <Qualifier>Magnitude</Qualifier>
+                <Qualifier>Average</Qualifier>
+                <FieldQuantity>Magnetic</FieldQuantity>
+            </Field>
+        </Parameter>
+        <Parameter>
+            <Name>Magnetic field vector standard deviation</Name>
+            <ParameterKey>Column21</ParameterKey>
+            <Description>Square root of sum of variances of component averages.</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>nT</Units>
+            <Field>
+                <Qualifier>Variance</Qualifier>
+                <Qualifier>Component</Qualifier>
+                <FieldQuantity>Magnetic</FieldQuantity>
+            </Field>
+        </Parameter>
+        <Parameter>
+            <Name>Magnetic field magnitude standard deviation</Name>
+            <ParameterKey>Column20</ParameterKey>
+            <Description>Standard deviation in the average of magnetic field 
+magnitudes</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>nT</Units>
+            <Field>
+                <Qualifier>Variance</Qualifier>
+                <Qualifier>Magnitude</Qualifier>
+                <FieldQuantity>Magnetic</FieldQuantity>
+            </Field>
+        </Parameter>
+        <Parameter>
+            <Name>Flow speed</Name>
+            <ParameterKey>Column23</ParameterKey>
+            <Description>Flow speed of the solar wind</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>km/s</Units>
+            <Particle>
+                <ParticleType>Proton</ParticleType>
+                <Qualifier>Magnitude</Qualifier>
+                <ParticleQuantity>Velocity</ParticleQuantity>
+            </Particle>
+        </Parameter>
+        <Parameter>
+            <Name>Flow velocity vector</Name>
+            <Description>Flow velocity vector, 3 GSE cartesian components</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>km/s</Units>
+            <CoordinateSystem>
+                <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+                <CoordinateSystemName>GSE</CoordinateSystemName>
+            </CoordinateSystem>
+            <Structure>
+                <Size>3</Size>
+                <Description>Flow velocity vector, GSE</Description>
+                <Element>
+                     <Name>Vx(GSE)</Name>
+                     <Index>1</Index>
+                     <ParameterKey>Column24</ParameterKey>
+                     <Units>km/s</Units>
+                </Element>
+                <Element>
+                     <Name>Vy(GSE)</Name>
+                     <Index>2</Index>
+                     <ParameterKey>Column25</ParameterKey>
+                     <Units>km/s</Units>
+                </Element>
+                <Element>
+                     <Name>Vz(GSE)</Name>
+                     <Index>3</Index>
+                     <ParameterKey>Column26</ParameterKey>
+                     <Units>km/s</Units>
+                </Element>
+            </Structure>
+            <Particle>
+                <ParticleType>Proton</ParticleType>
+                <Qualifier>Vector</Qualifier>
+                <ParticleQuantity>Velocity</ParticleQuantity>
+            </Particle>
+        </Parameter>
+        <Parameter>
+            <Name>Proton density</Name>
+            <ParameterKey>Column27</ParameterKey>
+            <Description>Proton density</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>no./cc</Units>
+            <Particle>
+                <ParticleType>Proton</ParticleType>
+                <ParticleQuantity>NumberDensity</ParticleQuantity>
+            </Particle>
+        </Parameter>
+        <Parameter>
+            <Name>Proton temperature</Name>
+            <ParameterKey>Column28</ParameterKey>
+            <Description>Proton scalar temperature</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>deg K</Units>
+            <Particle>
+                <ParticleType>Proton</ParticleType>
+                <ParticleQuantity>Temperature</ParticleQuantity>
+            </Particle>
+        </Parameter>
+        <Parameter>
+            <Name>Spacecraft position</Name>
+            <Description>Position of Geotail spacecraft, GSE cartesian 
+components</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>Re</Units>
+            <CoordinateSystem>
+                <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+                <CoordinateSystemName>GSE</CoordinateSystemName>
+            </CoordinateSystem>
+            <Structure>
+                <Size>3</Size>
+                <Description>Spacecraft position vector, GSE</Description>
+                <Element>
+                     <Name>X(Geotail,GSE)</Name>
+                     <Index>1</Index>
+                     <ParameterKey>Column29</ParameterKey>
+                     <Units>Re</Units>
+                </Element>
+                <Element>
+                     <Name>Y(Geotail,GSE)</Name>
+                     <Index>2</Index>
+                     <ParameterKey>Column30</ParameterKey>
+                     <Units>Re</Units>
+                </Element>
+                <Element>
+                     <Name>Z(Geotail,GSE)</Name>
+                     <Index>3</Index>
+                     <ParameterKey>Column31</ParameterKey>
+                     <Units>Re</Units>
+                </Element>
+            </Structure>
+            <Support>
+                 <SupportQuantity>Positional</SupportQuantity>
+            </Support>
+        </Parameter>
+        <Parameter>
+            <Name>Bow shock nose position</Name>
+            <Description>Bow shock nose position, as computed from observed data 
+and models, 3 cartesian components</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>Re</Units>
+            <CoordinateSystem>
+                <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+                <CoordinateSystemName>GSE</CoordinateSystemName>
+            </CoordinateSystem>
+            <Structure>
+                <Size>3</Size>
+                <Description>Bow shock nose (BSN) position vector, GSE</Description>
+                <Element>
+                     <Name>X(BSN,GSE)</Name>
+                     <Index>1</Index>
+                     <ParameterKey>Column32</ParameterKey>
+                     <Units>Re</Units>
+                </Element>
+                <Element>
+                     <Name>Y(BSN,GSE)</Name>
+                     <Index>2</Index>
+                     <ParameterKey>Column33</ParameterKey>
+                     <Units>Re</Units>
+                </Element>
+                <Element>
+                     <Name>Z(BSN,GSE)</Name>
+                     <Index>3</Index>
+                     <ParameterKey>Column34</ParameterKey>
+                     <Units>Re</Units>
+                </Element>
+            </Structure>
+            <Support>
+                 <SupportQuantity>Other</SupportQuantity>
+            </Support>
+        </Parameter>
+        <Parameter>
+            <Name>Mean time shift</Name>
+            <ParameterKey>Column08</ParameterKey>
+            <Description>Time shift from observation time to bow shock nose (BSN)
+arrival time, as averaged over all 15-16 sec B values with BSN arrival times in 
+minute of interest</Description>
+            <Cadence>PT1M</Cadence>
+            <Units>sec</Units>
+            <Support>
+                 <SupportQuantity>Other</SupportQuantity>
+            </Support>
+        </Parameter>
+        <Parameter>
+            <Name>Numbers of points in field and plasma averages</Name>
+            <Description>Numbers of fine scale points in field and plasma 
+averages</Description>
+            <Cadence>PT1M</Cadence>
+            <Structure>
+                <Size>2</Size>
+                <Description>Numbers of fine scale points in field and plasma 
+averages</Description>
+                <Element>
+                     <Name>Numbers of fine scale points in field averages</Name>
+                     <Index>1</Index>
+                     <ParameterKey>Column05</ParameterKey>
+                </Element>
+                <Element>
+                     <Name>Numbers of fine scale points in plasma averages</Name>
+                     <Index>2</Index>
+                     <ParameterKey>Column22</ParameterKey>
+                </Element>
+            </Structure>
+            <Support>
+                 <SupportQuantity>Other</SupportQuantity>
+            </Support>
+        </Parameter>
+    </NumericalData>
+</Spase>

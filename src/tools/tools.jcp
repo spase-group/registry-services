@@ -20,6 +20,7 @@
 			<debugger_ref/>
 			<param/>
 			<run>org.spase.tools.Profiler</run>
+			<verify>true</verify>
 		</runtime>
 	</runtimes>
 	<libraries/>

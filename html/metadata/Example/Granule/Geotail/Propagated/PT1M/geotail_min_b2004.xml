@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Spase xmlns="http://www.spase-group.org/data/schema">
+<Version>2.0.1</Version>
+<Granule>
+   <ResourceID>spase://Example/Granule/Geotail/Propagated/PT1M/geotail_min_b2004</ResourceID>
+   <ReleaseDate>2009-08-25T00:00:00</ReleaseDate>
+   <ParentID>spase://Example/NumericalData/Geotail/Propagated/PT1M</ParentID>
+<StartDate>2004-01-01T00:00:00Z</StartDate>
+<StopDate>2004-12-31T23:59:59Z</StopDate>
+   <Source>
+      <SourceType>Data</SourceType>
+      <URL>ftp://nssdcftp.gsfc.nasa.gov/spacecraft_data/omni/high_res_omni/sc_specific/geotail_min_b2004.txt</URL>
+      <DataExtent>
+   <Quantity>126</Quantity>
+         <Units>MB</Units>
+      </DataExtent>
+   </Source>
+</Granule>
+</Spase>

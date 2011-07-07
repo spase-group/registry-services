@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.spase-group.org/data/schema" xsi:schemaLocation="http://www.spase-group.org/data/schema http://www.spase-group.org/data/schema/spase-2_0_0.xsd">
+  <Version>2.0.0</Version>
+  <NumericalData>
+    <ResourceID>spase://Example/NumericalData/Geotail/LEP/EDB.PT12S</ResourceID>
+    <ResourceHeader>
+      <ResourceName>Geotail Editor-B 12 second Low-Energy Particles</ResourceName>
+      <ReleaseDate>2009-05-20T23:06:12Z</ReleaseDate>
+      <Description>An example subset of the 12-second Editor-B low-energy particle data from the Geotail spacecraft.
+      
+      Editor-A data are only acquired with the real-time operation in Usuda Deep Space Center (UDSC),Japan, while the Editor-B data are 24-hours continuouslyrecorded in the onboard tape recorders and are dumpedover the NASA/JPL Deep Space Network (DSN) stations.
+      
+      The ion energy analyzer (LEP-EAi) has two energy scan mode: RAM-A (60 eV to 40 keV) and RAM-B (5 keV to 40 keV). RAM-B is selected to protect the very sensitive detector from intense low energy fluxes that are usually seen in the solar wind and magnetosheath. The energy scan mode is automatically selected onboard depending on incoming ion fluxes. At present, only the ion moments in the RAM-A mode are listed for the LEP-EAi data. 
+      
+ The ion moment data of the solar wind analyzer (LEP-SW) should be used only qualitatively. The LEP-SW ion moments are listed when the energy scan mode of LEP-EAi is RAM-B.</Description>
+      <Acknowledgement>In any publications, the use of the Geotail data should be acknowledged, for example, as "Geotail magnetic field data were provided by Y. Saito, JAXA in Japan."</Acknowledgement>
+      <Contact>
+        <PersonID>spase://Example/Person/Yoshifumi.Saito</PersonID>
+        <Role>PrincipalInvestigator</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/Donald.H.Fairfield</PersonID>
+        <Role>Scientist</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/Jan.Merka</PersonID>
+        <Role>MetadataContact</Role>
+      </Contact>
+      <InformationURL>
+        <Name>The Geotail Low Energy Particle Experiment (LEP)</Name>
+        <URL>http://www.darts.isas.ac.jp/stp/geotail/jgg_lep.pdf</URL>
+        <Description>Reprint of Mukai, T., S. Machida, Y. Saito, M. Hirahara, T. Terasawa, N. Kaya, T. Obara, M. Ejiri, and A. Nishida, The low energy particle (LEP) experiment onboard the Geotail satellite, J. Geomag. Geoelectr., 46, 669-692, 1994.</Description>
+      </InformationURL>
+    </ResourceHeader>
+    <AccessInformation>
+      <RepositoryID>spase://Example/Repository/NASA/GSFC/SPDF/CDAWeb</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+        <Name>CDAWeb FTP download</Name>
+        <URL>ftp://cdaweb.gsfc.nasa.gov/pub/istp/geotail/edb12sec_lep/</URL>
+      </AccessURL>
+      <Format>CDF</Format>
+      <Encoding>None</Encoding>
+      <Acknowledgement>Data provider Y. Saito at JAXA, Japan and CDAWeb.</Acknowledgement>
+    </AccessInformation>
+    <AccessInformation>
+      <RepositoryID>spase://Example/Repository/DARTS</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+        <Name>DARTS/Geotail</Name>
+        <URL>http://www.darts.isas.ac.jp/stp/geotail/</URL>
+        <Description>Data ARchives and Transmission System (DARTS) is a versatile space science data archive for astrophysics, solar physics, and solar-terrestrial physics. DARTS primarily consists of the data acquired by Japanese scientific satellites and spacecrafts. DARTS is developed and maintained by the Center of Science-satellite Operation and Data Archive (C-SODA) at ISAS/JAXA.</Description>
+      </AccessURL>
+      <Format>Text</Format>
+      <Encoding>ASCII</Encoding>
+      <Acknowledgement>In any publications, the use of the Geotail data should be acknowledged, for example, as "Geotail magnetic field data were provided by Y. Saito through DARTS at Institute of Space and Astronautical Science, JAXA in Japan."</Acknowledgement>
+    </AccessInformation>
+    <InstrumentID>spase://Example/Instrument/Geotail/LEP</InstrumentID>
+    <MeasurementType>ThermalPlasma</MeasurementType>
+    <TemporalDescription>
+      <TimeSpan>
+        <StartDate>2004-01-01T00:00:00Z</StartDate>
+        <StopDate>2004-12-31T24:00:00Z</StopDate>
+      </TimeSpan>
+      <Cadence>PT12S</Cadence>
+    </TemporalDescription>
+    <ObservedRegion>Heliosphere.NearEarth</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosheath</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosphere</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosphere.Magnetotail</ObservedRegion>
+    <Caveats>Please use the Editor-A LEP dataset prior to the Editor-B LEP dataset since plasma moments in the Editor-A data are more reliable. (Plasma moments inthe Editor-B are calculated onboard.)
+    
+    The ion moment data of the solar wind analyzer (LEP-SW) should be used only qualitatively.</Caveats>
+    <Parameter>
+      <Name>Time Line</Name>
+      <ParameterKey>Epoch</ParameterKey>
+      <Description>Number of milliseconds since the CDF epoch</Description>
+      <Units>ms</Units>
+      <UnitsConversion>1e-3&gt;s</UnitsConversion>
+      <ValidMin>12-Nov-1994 00:00:00.000</ValidMin>
+      <ValidMax>31-Dec-2020 00:00:00.000</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Ion density</Name>
+      <ParameterKey>Ni</ParameterKey>
+      <Description>Ion density</Description>
+      <Caveats>Qualitative use only if Energy Scan Code = 2, i.e. if the energy scan mode is RAM-B/SW.</Caveats>
+      <Units>cm^-3</Units>
+      <UnitsConversion>1e-6&gt;m-3</UnitsConversion>
+      <ValidMin>0.0</ValidMin>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <ParticleQuantity>NumberDensity</ParticleQuantity>
+        <EnergyRange>
+          <Low>60</Low>
+          <High>38150</High>
+          <Units>eV</Units>
+        </EnergyRange>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Ion temperature</Name>
+      <ParameterKey>T</ParameterKey>
+      <Description>Ion temperature in satellite coordinates</Description>
+      <Caveats>Qualitative use only if Energy Scan Code = 2, i.e. if the energy scan mode is RAM-B/SW.</Caveats>
+      <Units>eV</Units>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>SC</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>2</Size>
+        <Element>
+          <Name>Ti,yy</Name>
+          <Index>1</Index>
+          <ValidMin>-10</ValidMin>
+          <ValidMax>10000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Ti,zz</Name>
+          <Index>2</Index>
+          <ValidMin>-10</ValidMin>
+          <ValidMax>10000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Parallel</Qualifier>
+        <Qualifier>Perpendicular</Qualifier>
+        <ParticleQuantity>Temperature</ParticleQuantity>
+        <EnergyRange>
+          <Low>60</Low>
+          <High>38150</High>
+          <Units>eV</Units>
+        </EnergyRange>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Sensor</Name>
+      <ParameterKey>Sensor</ParameterKey>
+      <Description>Name of the instrument sensor measuring data.</Description>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Mode</Name>
+      <ParameterKey>scan_code</ParameterKey>
+      <Description>Energy scan code/mode:
+      
+      *  1 = sensor EA = energy scan mode RAM-A
+      *  2 = sensor SW = energy scan mode RAM-B
+      </Description>
+      <ValidMin>1</ValidMin>
+      <ValidMax>2</ValidMax>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Ion velocity (GSE)</Name>
+      <ParameterKey>VGSE</ParameterKey>
+      <Description>Ion velocity in GSE coordinates</Description>
+      <Caveats>Qualitative use only if Energy Scan Code = 2, i.e. if the energy scan mode is RAM-B/SW.</Caveats>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Vxi (GSE)</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-2000</ValidMin>
+          <ValidMax>2000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vyi (GSE)</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-2000</ValidMin>
+          <ValidMax>2000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vzi (GSE)</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-2000</ValidMin>
+          <ValidMax>2000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <ParticleQuantity>FlowVelocity</ParticleQuantity>
+        <EnergyRange>
+          <Low>60</Low>
+          <High>38150</High>
+          <Units>eV</Units>
+        </EnergyRange>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Geotail position (GSE)</Name>
+      <ParameterKey>XYZGSE</ParameterKey>
+      <Description>Geotail position in GSE cartesian coordinates</Description>
+      <Caveats>1 Re = 6371.2 km</Caveats>
+      <Units>Re</Units>
+      <UnitsConversion>6.3712e6&gt;m</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>X (GSE)</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-500.0</ValidMin>
+          <ValidMax>500.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Y (GSE)</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-500.0</ValidMin>
+          <ValidMax>500.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Z (GSE)</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-500.0</ValidMin>
+          <ValidMax>500.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <Qualifier>Vector</Qualifier>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Ion velocity (GSM)</Name>
+      <ParameterKey>VGSM</ParameterKey>
+      <Description>Ion velocity in GSM coordinates</Description>
+      <Caveats>Qualitative use only if Energy Scan Code = 2, i.e. if the energy scan mode is RAM-B/SW.</Caveats>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSM</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Vxi (GSM)</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-2000</ValidMin>
+          <ValidMax>2000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vyi (GSM)</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-2000</ValidMin>
+          <ValidMax>2000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vzi (GSM)</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-2000</ValidMin>
+          <ValidMax>2000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <ParticleQuantity>FlowVelocity</ParticleQuantity>
+        <EnergyRange>
+          <Low>60</Low>
+          <High>38150</High>
+          <Units>eV</Units>
+        </EnergyRange>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Geotail position (GSM)</Name>
+      <ParameterKey>XYZGSM</ParameterKey>
+      <Description>Geotail position in GSM cartesian coordinates</Description>
+      <Caveats>1 Re = 6371.2 km</Caveats>
+      <Units>Re</Units>
+      <UnitsConversion>6.3712e6&gt;m</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSM</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>X (GSM)</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-500.0</ValidMin>
+          <ValidMax>500.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Y (GSM)</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-500.0</ValidMin>
+          <ValidMax>500.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Z (GSM)</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-500.0</ValidMin>
+          <ValidMax>500.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <Qualifier>Vector</Qualifier>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Ion velocity (SM)</Name>
+      <ParameterKey>VSM</ParameterKey>
+      <Description>Ion velocity in SM coordinates</Description>
+      <Caveats>Qualitative use only if Energy Scan Code = 2, i.e. if the energy scan mode is RAM-B/SW.</Caveats>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>SM</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Vxi (SM)</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-2000</ValidMin>
+          <ValidMax>2000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vyi (SM)</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-2000</ValidMin>
+          <ValidMax>2000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vzi (SM)</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-2000</ValidMin>
+          <ValidMax>2000</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <ParticleQuantity>FlowVelocity</ParticleQuantity>
+        <EnergyRange>
+          <Low>60</Low>
+          <High>38150</High>
+          <Units>eV</Units>
+        </EnergyRange>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Geotail position (SM)</Name>
+      <ParameterKey>XYZSM</ParameterKey>
+      <Description>Geotail position in SM cartesian coordinates</Description>
+      <Caveats>1 Re = 6371.2 km</Caveats>
+      <Units>Re</Units>
+      <UnitsConversion>6.3712e6&gt;m</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>SM</CoordinateSystemName>
+      </CoordinateSystem>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>X (SM)</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-500.0</ValidMin>
+          <ValidMax>500.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Y (SM)</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-500.0</ValidMin>
+          <ValidMax>500.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Z (SM)</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-500.0</ValidMin>
+          <ValidMax>500.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <Qualifier>Vector</Qualifier>
+        <SupportQuantity>Positional</SupportQuantity>
+      </Support>
+    </Parameter>
+  </NumericalData>
+</Spase>

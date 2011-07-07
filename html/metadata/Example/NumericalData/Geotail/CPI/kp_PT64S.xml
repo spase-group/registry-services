@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.spase-group.org/data/schema" xsi:schemaLocation="http://www.spase-group.org/data/schema http://www.spase-group.org/data/schema/spase-2_0_0.xsd">
+  <Version>2.0.0</Version>
+  <NumericalData>
+    <ResourceID>spase://Example/NumericalData/Geotail/CPI/kp_PT64S</ResourceID>
+    <ResourceHeader>
+      <ResourceName>Geotail CPI Plasma Key Parameters (64s)</ResourceName>
+      <ReleaseDate>2009-05-20T23:06:12Z</ReleaseDate>
+      <Description>An example subset of a combination of plasma key parameters from the Geotail CPI analyzers. 
+      The CPI-SW Solar Wind Analyzer provides
+        * Ion number density
+        * Average proton energy
+        * Bulk flow velocity 
+
+      The CPI-HP Hot Plasma Analyzer provides
+         * Ion number density
+         * Average proton energy
+         * Average electron energy
+         * Bulk flow velocity
+         * Plasma pressure 
+         
+      The CPI-IC Ion Composition Analyzer provides principal Species
+          * H+
+          * He++
+          * He+
+          * O+
+   </Description>
+      <Contact>
+        <PersonID>spase://Example/Person/Louis.A.Frank</PersonID>
+        <Role>PrincipalInvestigator</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/Jan.Merka</PersonID>
+        <Role>MetadataContact</Role>
+      </Contact>
+      <InformationURL>
+        <Name>CPI Survey Plots</Name>
+        <URL>http://www-pi.physics.uiowa.edu/cpi/</URL>
+        <Description>Geotail CPI description and survey plots.</Description>
+      </InformationURL>
+    </ResourceHeader>
+    <AccessInformation>
+      <RepositoryID>spase://Example/Repository/NASA/GSFC/SPDF/CDAWeb</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+        <Name>CDAWeb FTP download</Name>
+        <URL>ftp://cdaweb.gsfc.nasa.gov/pub/istp/geotail/cpi/</URL>
+      </AccessURL>
+      <Format>CDF</Format>
+      <Encoding>None</Encoding>
+    </AccessInformation>
+    <InstrumentID>spase://Example/Instrument/Geotail/CPI</InstrumentID>
+    <MeasurementType>ThermalPlasma</MeasurementType>
+    <TemporalDescription>
+      <TimeSpan>
+        <StartDate>2004-01-01T00:00:00Z</StartDate>
+        <StopDate>2004-12-31T24:00:00Z</StopDate>
+      </TimeSpan>
+      <Cadence>PT64S</Cadence>
+    </TemporalDescription>
+    <ObservedRegion>Heliosphere.NearEarth</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosheath</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosphere</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosphere.Magnetotail</ObservedRegion>
+    <Caveats>The CPI solar wind ion analyzer is an E/Q analyzer and the initial distribution functions were calculated assuming that the plasma is H+. Care must be taken when multi-component plasmas are present. If He++ is present and is flowing with the same speed as the H+ component, it will contribute to the distribution function at twice the velocity (four times the energy) of the H+. To facilitate the automated processing of the data the integral was evaluated between |vmin| = 171 km/s and |vmax| = 1.35 × |u|. The resulting temperatures produce excellent fits to the observations. When He++ is present the distribution functions are consistent with an He++ temperature, THe++ = 4 × TH+, i.e., the H+ and He++ have similar thermal velocities.</Caveats>
+    <Parameter>
+      <Name>Time</Name>
+      <ParameterKey>Epoch</ParameterKey>
+      <Description>Time in milliseconds, centered, since CDF Epoch</Description>
+      <Units>ms</Units>
+      <UnitsConversion>1e-3&gt;s</UnitsConversion>
+      <ValidMin>08-Sep-1992 00:00:00.000</ValidMin>
+      <ValidMax>31-Dec-2020 20:00:00.000</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Time</Name>
+      <ParameterKey>Time_PB5</ParameterKey>
+      <Description>Time, centered, in GSFC PB5 format (yr, day, ms). Jan 1 = Day 1.</Description>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Year</Name>
+          <Index>1</Index>
+          <Units>year</Units>
+          <ValidMin>1992</ValidMin>
+          <ValidMax>2020</ValidMax>
+          <FillValue>-2147483648</FillValue>
+        </Element>
+        <Element>
+          <Name>Day of year</Name>
+          <Index>2</Index>
+          <Units>day</Units>
+          <ValidMin>1</ValidMin>
+          <ValidMax>366</ValidMax>
+          <FillValue>-2147483648</FillValue>
+        </Element>
+        <Element>
+          <Name>Elapsed millisecond of day</Name>
+          <Component>I</Component>
+          <Index>3</Index>
+          <Units>ms</Units>
+          <ValidMin>0</ValidMin>
+          <ValidMax>86400000</ValidMax>
+          <FillValue>-2147483648</FillValue>
+        </Element>
+      </Structure>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Ion Number Density (CPI/SWA)</Name>
+      <ParameterKey>SW_P_Den</ParameterKey>
+      <Description>Ion number density (ions 144-7000 eV, 60x60 deg FOV, CPI/SWA), scalar</Description>
+      <Caveats>From 5 deg angular bins.</Caveats>
+      <Units>cm^-3</Units>
+      <UnitsConversion>1e6&gt;m^-3</UnitsConversion>
+      <RenderingHints>
+        <AxisLabel>n(SWA)</AxisLabel>
+        <ValueFormat>F8.3</ValueFormat>
+      </RenderingHints>
+      <ValidMin>0.01</ValidMin>
+      <ValidMax>1000.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>NumberDensity</ParticleQuantity>
+        <EnergyRange>
+          <Low>144</Low>
+          <High>7000</High>
+          <Units>eV</Units>
+        </EnergyRange>
+        <AzimuthalAngleRange>
+          <Low>-56.25</Low>
+          <High>56.25</High>
+          <Units>deg</Units>
+        </AzimuthalAngleRange>
+        <PolarAngleRange>
+          <Low>60</Low>
+          <High>120</High>
+          <Units>deg</Units>
+        </PolarAngleRange>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Ion Average Energy (CPI/SWA)</Name>
+      <ParameterKey>SW_P_AVGE</ParameterKey>
+      <Description>Ion average energy (ions 144-7000 eV, in the spacecraft frame of reference, CPI/SWA), scalar</Description>
+      <Units>eV</Units>
+      <UnitsConversion>1.60217653e-19&gt;J</UnitsConversion>
+      <RenderingHints>
+        <ValueFormat>F7.0</ValueFormat>
+      </RenderingHints>
+      <ValidMin>100.0</ValidMin>
+      <ValidMax>8000.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Average</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>Energy</ParticleQuantity>
+        <EnergyRange>
+          <Low>144</Low>
+          <High>7000</High>
+          <Units>eV</Units>
+        </EnergyRange>
+        <AzimuthalAngleRange>
+          <Low>-56.25</Low>
+          <High>56.25</High>
+          <Units>deg</Units>
+        </AzimuthalAngleRange>
+        <PolarAngleRange>
+          <Low>60</Low>
+          <High>120</High>
+          <Units>deg</Units>
+        </PolarAngleRange>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Ion bulk Flow Velocity (CPI/SWA)</Name>
+      <ParameterKey>SW_V</ParameterKey>
+      <Description>Ion bulk flow velocity in GSE coordinates (ions 144-7000 eV, 60x60 deg FOV, CPI/SWA)</Description>
+      <Caveats>From 5 deg angular bins</Caveats>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <RenderingHints>
+        <ValueFormat>F7.0</ValueFormat>
+      </RenderingHints>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Vx</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-1400.0</ValidMin>
+          <ValidMax>1400.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vy</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-1400.0</ValidMin>
+          <ValidMax>1400.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vz</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-1400.0</ValidMin>
+          <ValidMax>1400.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Vector</Qualifier>
+        <ParticleQuantity>FlowVelocity</ParticleQuantity>
+        <EnergyRange>
+          <Low>144</Low>
+          <High>7000</High>
+          <Units>eV</Units>
+        </EnergyRange>
+        <AzimuthalAngleRange>
+          <Low>-56.25</Low>
+          <High>56.25</High>
+          <Units>deg</Units>
+        </AzimuthalAngleRange>
+        <PolarAngleRange>
+          <Low>60</Low>
+          <High>120</High>
+          <Units>deg</Units>
+        </PolarAngleRange>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>CPI/SWA Data Quality Flag</Name>
+      <ParameterKey>Quality_SW</ParameterKey>
+      <Description>CPI/SWA Data Quality Flag (0: adequate; 100: poor, more problems), scalar</Description>
+      <ValidMin>0.0</ValidMin>
+      <ValidMax>100.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>CPI Post Gap Flag</Name>
+      <ParameterKey>GAP_FLAG</ParameterKey>
+      <Description>CPI Post Gap Flag (0: no gap immediately prior to this record; 1: gap due to instrument mode; 2: gap due to missing SIRIUS data; 3: gap due to noisy SIRIUS data; 20: gap due to missing Minor Frame(s)), scalar</Description>
+      <ValidMin>0</ValidMin>
+      <ValidMax>20</ValidMax>
+      <FillValue>-2147483648</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Ion Number Density (CPI/HPA)</Name>
+      <ParameterKey>HP_P_Den</ParameterKey>
+      <Description>Ion number density (ions 50-50000 eV, equatorial plane, CPI/HPA), scalar</Description>
+      <Caveats>The ions are assumed to be protons</Caveats>
+      <Units>cm^-3</Units>
+      <UnitsConversion>1e6&gt;m^-3</UnitsConversion>
+      <RenderingHints>
+        <AxisLabel>n(HPA)</AxisLabel>
+        <ValueFormat>F8.3</ValueFormat>
+      </RenderingHints>
+      <ValidMin>0.01</ValidMin>
+      <ValidMax>1000.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>NumberDensity</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Ion Average Energy (CPI/HPA)</Name>
+      <ParameterKey>HP_P_AVGE</ParameterKey>
+      <Description>Ion average energy (ions 50-50000 eV, equatorial plane, CPI/HPA), scalar</Description>
+      <Caveats/>
+      <Units>eV</Units>
+      <UnitsConversion>1.60217653e-19&gt;J</UnitsConversion>
+      <RenderingHints>
+        <ValueFormat>F7.0</ValueFormat>
+      </RenderingHints>
+      <ValidMin>50.0</ValidMin>
+      <ValidMax>50000.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Average</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>Energy</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Ion Bulk Flow Velocity (CPI/HPA)</Name>
+      <ParameterKey>HP_V</ParameterKey>
+      <Description>Bulk ion flow velocity, approximate GSE X-Y components (ions 50-50000 eV, CPI/HPA)</Description>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <RenderingHints>
+        <ValueFormat>F7.0</ValueFormat>
+      </RenderingHints>
+      <Structure>
+        <Size>2</Size>
+        <Element>
+          <Name>Vx</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-4000.0</ValidMin>
+          <ValidMax>4000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vy</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-4000.0</ValidMin>
+          <ValidMax>4000.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Vector</Qualifier>
+        <ParticleQuantity>FlowVelocity</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Electron Average Energy (CPI/HPA)</Name>
+      <ParameterKey>HP_E_AVGE</ParameterKey>
+      <Description>Average electron energy  (electrons 50-50000 eV, CPI/HPA), scalar</Description>
+      <Caveats/>
+      <Units>eV</Units>
+      <UnitsConversion>1.60217653e-19&gt;J</UnitsConversion>
+      <RenderingHints>
+        <ValueFormat>F7.0</ValueFormat>
+      </RenderingHints>
+      <ValidMin>50.0</ValidMin>
+      <ValidMax>50000.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Electron</ParticleType>
+        <Qualifier>Average</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>Energy</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Plasma Pressure (CPI/HPA)</Name>
+      <ParameterKey>W</ParameterKey>
+      <Description>Plasma pressure (50-50000 eV, CPI/HPA), scalar</Description>
+      <Units>Pa</Units>
+      <ValidMin>1.0E-15</ValidMin>
+      <ValidMax>1.0E-5</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>Pressure</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>CPI/HPA Data Quality Flag</Name>
+      <ParameterKey>Quality_HP</ParameterKey>
+      <Description>CPI/HPA data quality flag (0: adequate; 100: poor, more problems), scalar</Description>
+      <ValidMin>0.0</ValidMin>
+      <ValidMax>100.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>CPI/ICA Data Quality Flag</Name>
+      <ParameterKey>Quality_IC</ParameterKey>
+      <Description>CPI/ICA data quality flag (0: adequate; 100: poor, more problems), scalar</Description>
+      <ValidMin>0.0</ValidMin>
+      <ValidMax>100.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>H+ Flag (CPI/ICA)</Name>
+      <ParameterKey>H_P_FLAG</ParameterKey>
+      <Description>H+ flag: non-zero value indicates presence of singly ionized hydrogen, (CPI/ICA), scalar</Description>
+      <ValidMin>0</ValidMin>
+      <ValidMax>99</ValidMax>
+      <FillValue>-128</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>He++ Flag (CPI/ICA)</Name>
+      <ParameterKey>HE_PP_FLAG</ParameterKey>
+      <Description>He++ flag: non-zero value indicates presence of doubly ionized helium, (CPI/ICA)), scalar</Description>
+      <ValidMin>0</ValidMin>
+      <ValidMax>99</ValidMax>
+      <FillValue>-128</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>He+ Flag</Name>
+      <ParameterKey>HE_P_FLAG</ParameterKey>
+      <Description>He+ flag: non-zero value indicates presence of singly ionized helium, (CPI/ICA), scalar</Description>
+      <ValidMin>0</ValidMin>
+      <ValidMax>99</ValidMax>
+      <FillValue>-128</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>O+ Flag (CPI/ICA)</Name>
+      <ParameterKey>O_P_FLAG</ParameterKey>
+      <Description>O+ flag: non-zero value indicates presence of singly ionized atomic oxygen, (CPI/ICA), scalar</Description>
+      <ValidMin>0</ValidMin>
+      <ValidMax>99</ValidMax>
+      <FillValue>-128</FillValue>
+      <Support>
+        <SupportQuantity>Other</SupportQuantity>
+      </Support>
+    </Parameter>
+  </NumericalData>
+</Spase>

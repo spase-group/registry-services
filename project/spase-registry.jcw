@@ -3,6 +3,8 @@
 <workspace>
 	<settings>
 		<label>Spase-Registry</label>
+		<id>14</id>
+		<version>0</version>
 	</settings>
 	<users>
 		<user>
@@ -11,13 +13,13 @@
 	</users>
 	<projects>
 		<project>
-			<path>..\src\tools\tools.jcp</path>
-		</project>
-		<project>
 			<path>..\src\client\client.jcp</path>
 		</project>
 		<project>
 			<path>..\src\filesystem\filesystem.jcp</path>
+		</project>
+		<project>
+			<path>..\src\tools\tools.jcp</path>
 		</project>
 	</projects>
 </workspace>

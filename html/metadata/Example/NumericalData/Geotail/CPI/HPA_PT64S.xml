@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.spase-group.org/data/schema" xsi:schemaLocation="http://www.spase-group.org/data/schema http://www.spase-group.org/data/schema/spase-2_0_0.xsd">
+  <Version>2.0.0</Version>
+  <NumericalData>
+    <ResourceID>spase://Example/NumericalData/Geotail/CPI/HPA_PT64S</ResourceID>
+    <ResourceHeader>
+      <ResourceName>Geotail CPI Hot Plasma Moments</ResourceName>
+      <AlternateName>Geotail CPI HPA High Time Resolution Plasma Moments</AlternateName>
+      <ReleaseDate>2009-05-20T23:06:12Z</ReleaseDate>
+      <Description>An example subset of the CPI/HPA Hot Plasma Analyzer high time resolution moments of hot plasma:
+        Ion number density
+        Ion average temperature
+        Ion bulk flow velocity
+        Electron number density
+        Electron average temperature
+
+The CPI/HPA data are good in the magnetosphere and may be usefull in the magnetosheath.
+     </Description>
+      <Contact>
+        <PersonID>spase://Example/Person/Louis.A.Frank</PersonID>
+        <Role>PrincipalInvestigator</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/William.R.Paterson</PersonID>
+        <Role>DataProducer</Role>
+      </Contact>
+      <Contact>
+        <PersonID>spase://Example/Person/Jan.Merka</PersonID>
+        <Role>MetadataContact</Role>
+      </Contact>
+      <InformationURL>
+        <Name>CPI Survey Plots</Name>
+        <URL>http://www-pi.physics.uiowa.edu/cpi/</URL>
+        <Description>Geotail CPI description and survey plots.</Description>
+      </InformationURL>
+    </ResourceHeader>
+    <AccessInformation>
+      <RepositoryID>spase://Example/Repository/NASA/GSFC/SPDF/CDAWeb</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+        <Name>CDAWeb FTP download</Name>
+        <URL>ftp://cdaweb.gsfc.nasa.gov/pub/istp/geotail/cpi_hpamom/</URL>
+      </AccessURL>
+      <Format>CDF</Format>
+      <Encoding>None</Encoding>
+    </AccessInformation>
+    <AccessInformation>
+      <RepositoryID>spase://Example/Repository/UI</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+        <Name>University of Iowa: Geotail CPI HPA high time resolution data</Name>
+        <URL>http://erebus.physics.uiowa.edu/cpi-data/hp/</URL>
+      </AccessURL>
+      <Format>Text</Format>
+      <Encoding>ASCII</Encoding>
+    </AccessInformation>
+    <InstrumentID>spase://Example/Instrument/Geotail/CPI</InstrumentID>
+    <MeasurementType>ThermalPlasma</MeasurementType>
+    <TemporalDescription>
+      <TimeSpan>
+        <StartDate>2004-01-01T00:00:00Z</StartDate>
+        <StopDate>2004-12-31T24:00:00Z</StopDate>
+      </TimeSpan>
+      <Cadence>PT64S</Cadence>
+    </TemporalDescription>
+    <ObservedRegion>Earth.Magnetosheath</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosphere</ObservedRegion>
+    <ObservedRegion>Earth.Magnetosphere.Magnetotail</ObservedRegion>
+    <Caveats>The electron sensors for the CPI HP analyzer require regular intercalibration.  Also, their sensitivity declined over time. A detrending factor is applied so that average electron densities are consistent with ion densities. The HP ion data and the electron data are good through a the end of 2005. The sensitivity decline had been linear until the end of 2005, but hasn't been checked for 2006 or 2007. That may affect the HP electron parameters for 2006 and 2007, but not the HP ion parameters.
+
+In June of 2007, the HP sensor bias voltage was raised to improve the electron gain, which over the course of 15 years had dropped by about half. This requires recalibration of both the HP ion sensors and the HP electron sensors.</Caveats>
+    <Parameter>
+      <Name>Time</Name>
+      <ParameterKey>Epoch</ParameterKey>
+      <Description>Time in milliseconds, centered, since CDF Epoch</Description>
+      <Units>ms</Units>
+      <UnitsConversion>1e-3&gt;s</UnitsConversion>
+      <ValidMin>08-Sep-1992 00:00:00.000</ValidMin>
+      <ValidMax>31-Dec-2020 20:00:00.000</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Support>
+        <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+    </Parameter>
+    <Parameter>
+      <Name>Ni</Name>
+      <ParameterKey>Density_i</ParameterKey>
+      <Description>Ion number density (Hot Plasma Analyzer), scalar</Description>
+      <Caveats>The ions are assumed to be protons</Caveats>
+      <Units>cm^-3</Units>
+      <UnitsConversion>1e6&gt;m^-3</UnitsConversion>
+      <RenderingHints>
+        <ValueFormat>F8.3</ValueFormat>
+      </RenderingHints>
+      <ValidMin>0.01</ValidMin>
+      <ValidMax>1000.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>NumberDensity</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Ti</Name>
+      <ParameterKey>Temp_i</ParameterKey>
+      <Description>Kinetic temperature of HPA ions, scalar</Description>
+      <Caveats>Calculated by integrating the distribution function</Caveats>
+      <Units>K</Units>
+      <RenderingHints>
+        <ValueFormat>F11.0</ValueFormat>
+      </RenderingHints>
+      <ValidMin>10000.0</ValidMin>
+      <ValidMax>5.0E8</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>Temperature</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Vi</Name>
+      <ParameterKey>Velocity_i</ParameterKey>
+      <Description>Ion bulk flow velocity vector in GSE coordinates</Description>
+      <Units>km/s</Units>
+      <UnitsConversion>1e3&gt;m/s</UnitsConversion>
+      <CoordinateSystem>
+        <CoordinateRepresentation>Cartesian</CoordinateRepresentation>
+        <CoordinateSystemName>GSE</CoordinateSystemName>
+      </CoordinateSystem>
+      <RenderingHints>
+        <ValueFormat>F9.2</ValueFormat>
+      </RenderingHints>
+      <Structure>
+        <Size>3</Size>
+        <Element>
+          <Name>Vx GSE</Name>
+          <Component>I</Component>
+          <Index>1</Index>
+          <ValidMin>-1400.0</ValidMin>
+          <ValidMax>1400.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vy GSE</Name>
+          <Component>J</Component>
+          <Index>2</Index>
+          <ValidMin>-1400.0</ValidMin>
+          <ValidMax>1400.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+        <Element>
+          <Name>Vz GSE</Name>
+          <Component>K</Component>
+          <Index>3</Index>
+          <ValidMin>-1400.0</ValidMin>
+          <ValidMax>1400.0</ValidMax>
+          <FillValue>-1.0E31</FillValue>
+        </Element>
+      </Structure>
+      <Particle>
+        <ParticleType>Proton</ParticleType>
+        <ParticleType>AlphaParticle</ParticleType>
+        <ParticleType>Ion</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Vector</Qualifier>
+        <ParticleQuantity>FlowVelocity</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Ne</Name>
+      <ParameterKey>Density_e</ParameterKey>
+      <Description>Electron number density (Hot Plasma Analyzer), scalar</Description>
+      <Units>cm^-3</Units>
+      <UnitsConversion>1e6&gt;m^-3</UnitsConversion>
+      <RenderingHints>
+        <ValueFormat>F8.3</ValueFormat>
+      </RenderingHints>
+      <ValidMin>0.01</ValidMin>
+      <ValidMax>1000.0</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Electron</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>NumberDensity</ParticleQuantity>
+      </Particle>
+    </Parameter>
+    <Parameter>
+      <Name>Te</Name>
+      <ParameterKey>Temp_e</ParameterKey>
+      <Description>Kinetic temperature of HPA electrons, scalar</Description>
+      <Caveats>Calculated by integrating the distribution function</Caveats>
+      <Units>K</Units>
+      <RenderingHints>
+        <ValueFormat>F11.0</ValueFormat>
+      </RenderingHints>
+      <ValidMin>10000.0</ValidMin>
+      <ValidMax>5.0E8</ValidMax>
+      <FillValue>-1.0E31</FillValue>
+      <Particle>
+        <ParticleType>Electron</ParticleType>
+        <Qualifier>Moment</Qualifier>
+        <Qualifier>Scalar</Qualifier>
+        <ParticleQuantity>Temperature</ParticleQuantity>
+      </Particle>
+    </Parameter>
+  </NumericalData>
+</Spase>
