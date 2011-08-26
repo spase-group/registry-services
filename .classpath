@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="lib"/>
+	<classpathentry kind="lib" path="build/jar/spase-registry-1.1.1.jar"/>
+	<classpathentry kind="lib" path="html/WEB-INF/lib/commons-cli-1.1.jar"/>
+	<classpathentry kind="lib" path="html/WEB-INF/lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="html/WEB-INF/lib/commons-net-1.4.1.jar"/>
+	<classpathentry kind="lib" path="html/WEB-INF/lib/igpp-servlet-1.0.1.jar"/>
+	<classpathentry kind="lib" path="html/WEB-INF/lib/igpp-util-1.0.4.jar"/>
+	<classpathentry kind="lib" path="html/WEB-INF/lib/igpp-web-1.0.2.jar"/>
+	<classpathentry kind="lib" path="html/WEB-INF/lib/igpp-xml-1.0.1.jar"/>
+	<classpathentry kind="lib" path="html/WEB-INF/lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="html/WEB-INF/lib/saxon9he.jar"/>
+	<classpathentry kind="lib" path="lib/commons-cli-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-net-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/igpp-servlet-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/igpp-util-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/igpp-web-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/igpp-xml-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="lib/saxon9he.jar"/>
+	<classpathentry kind="lib" path="lib/spase-tools-1.0.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

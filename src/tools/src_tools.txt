@@ -1,3 +1,0 @@
-C:\Projects\spase\java\registry\src\tools\Freshen.java
-C:\Projects\spase\java\registry\src\tools\Profiler.java
-C:\Projects\spase\java\registry\src\tools\ResourceProfile.java

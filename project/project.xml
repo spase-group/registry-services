@@ -4,17 +4,16 @@
    See "build.xml" for how each property influences the build.
 -->
 <project name="project-config" basedir="." default="...">
-    <property name="version"        value="1.1.0"/>
+    <property name="version"        value="1.1.1"/>
     <property name="package.title"  value="SPASE Registry"/>
     <property name="package.name" value="spase-registry"/>
     <property name="package.vendor" value="UCLA/IGPP"/>
-    <property name="copyright"    value="Copyright &#169; 2008-2010 Regents University of California. All Rights Reserved."/>    
     <property name="main-class"   value="org.spase.tools.HelloWorld"/>
     
     <property name="release.user"  value="tking" />
     <property name="release.host"  value="release.igpp.ucla.edu" />
     <property name="release.path"  value="/var/www/release/root/applications/spase/registry" />
     <property name="release.local"   value="/java/jre/lib/ext" />
-    <property name="release.jar"   value="/projects/jar" />
+    <property name="release.jar"   value="/projects/jar/spase" />
     
 </project>
