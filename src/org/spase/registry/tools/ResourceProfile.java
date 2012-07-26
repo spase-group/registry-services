@@ -22,6 +22,7 @@ public class ResourceProfile
 	String mRegistryID = "";
 	String mResourceType = "";
 	String mResourceID = "";
+	String mResourcePath = "";
 	String mResourceName = "";
 	String mReleaseDate = "";
 	String mStartDate = "";
@@ -68,9 +69,10 @@ public class ResourceProfile
    public void printSolrProfile(PrintStream out)
    {
    	out.println("<doc>");
-		out.println("   <field name=\"registryid\">" + mRegistryID + "</field>");
+   		out.println("   <field name=\"registryid\">" + mRegistryID + "</field>");
 		out.println("   <field name=\"resourcetype\">" + mResourceType + "</field>");
 		out.println("   <field name=\"resourceid\">" + mResourceID + "</field>");
+   		out.println("   <field name=\"resourcepath\">" + mResourcePath + "</field>");
 		out.println("   <field name=\"resourcename\">" + mResourceName + "</field>");
 		for(String buffer : mMeasurementType) { out.println("   <field name=\"measurementtype\">" + buffer + "</field>"); }
 		for(String buffer : mPhenomenonType) { out.println("   <field name=\"phenomenontype\">" + buffer + "</field>"); }
@@ -146,9 +148,23 @@ public class ResourceProfile
 	public void setResourceType(ArrayList<String> value) { if(value.size() > 0) mResourceType = value.get(0); }
 	public String getResourceType() { return mResourceType; }
 
-	public void setResourceID(String value) { mResourceID = value; }
-	public void setResourceID(ArrayList<String> value) { if(value.size() > 0) mResourceID = value.get(0); }
+	public void setResourceID(String value) { 
+		mResourceID = value; 
+		// Format of a ResourceID is "spase://Authority/ResourceType/path"
+		String path = mResourceID;
+		for(int i = 0; i < 4; i++) {
+			int n = path.indexOf("/");
+			if(n == -1) break;	// No more tokens
+			path = path.substring(n+1);
+		}
+		setResourcePath(path);
+	}
+	public void setResourceID(ArrayList<String> value) { if(value.size() > 0) setResourceID(value.get(0)); } 
 	public String getResourceID() { return mResourceID; }
+
+	public void setResourcePath(String value) { mResourcePath = value; }
+	public void setResourcePath(ArrayList<String> value) { if(value.size() > 0) mResourcePath = value.get(0); }
+	public String getResourcePath() { return mResourcePath; }
 
 	public void setResourceName(String value) { mResourceName = value; }
 	public void setResourceName(ArrayList<String> value) { if(value.size() > 0) mResourceName = value.get(0); }

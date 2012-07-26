@@ -426,7 +426,7 @@ public class Status extends SmartHttpServlet
 	 * @param stopDate the stop date to use for the scan. May be absolute or relative.
 	 *        If null then the date is uncontrained.
 	 * @param details send detail information only.
-	 * @param counts a {@link Map} with the elements "New", "Modified" and "Deleted" to store transaction counts.
+	 * @param counts a {@link HashMap} with the elements "New", "Modified" and "Deleted" to store transaction counts.
 	 **/
 	public void sendNewModifiedGit(String authority, String startDate, String stopDate, Boolean details, HashMap<String, Integer> counts)
    	throws Exception
@@ -510,7 +510,7 @@ public class Status extends SmartHttpServlet
 	 * @param startDate the start date to use for the scan. 
 	 * @param stopDate the stop date to use for the scan. 
 	 * @param details send detail information only.
-	 * @param counts a {@link Map} with the elements "New", "Modified" and "Deleted" to store transaction counts.
+	 * @param counts a {@link HashMap} with the elements "New", "Modified" and "Deleted" to store transaction counts.
 	 **/
 	public void sendNewModifiedFile(String authority, String path, Calendar startDate, Calendar stopDate, Boolean details, HashMap<String, Integer> counts)
    	throws Exception
@@ -596,13 +596,18 @@ public class Status extends SmartHttpServlet
 	}
 	
 	/** 
-	 * Send the inventory information of an authority within the respositry.
+	 * Send the inventory information of an authority within the repository.
 	 *
 	 * Scans a registry maintained by the passed authority and determines
-	 * how many items for each top-level category are maintained by the registry. 
+	 * how many items for each top-level category are maintained by the registry.
+	 * The method is called for each level beginning with the "atLevel" and ending
+	 * at the "endLevel". 
 	 * Output is packaged in an XML formatted response document.
 	 *
-	 * @param authority the name of the registry authority (registry) to scan.
+	 * @param path the path to the directory to scan.
+	 * @param atLevel the starting level for the inventory list.
+	 * @param endLevel the ending level for the inventory list.
+	 * 
 	 **/
 	public void sendInventory(String path, int atLevel, int endLevel)
    	throws Exception

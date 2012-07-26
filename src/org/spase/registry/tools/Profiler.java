@@ -217,7 +217,7 @@ public class Profiler
 	/**
 	 * Read all SPASE resource descriptions at the given path.
 	 * Resource descriptions are files that have a defined extension.
-	 * The path to the resources can be recusively searched.
+	 * The path to the resources can be recursively searched.
     *
     * @param path		the pathname of the file to parse.
     *

@@ -469,7 +469,6 @@ public class Search extends SmartHttpServlet
 	 *
 	 * @param path the path to scan. 
 	 * @param words	the {@link ArrayList} of words to search for. If null no word search is performed.
-	 * @param identifier the resource identifier to search for. If null no identifier search is performed.
 	 *
 	 * @return true of words or identifier are founde, false otherwise.
 	 **/	

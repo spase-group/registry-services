@@ -9,18 +9,6 @@
 
 package org.spase.registry.client;
 
-import igpp.servlet.MultiPrinter;
-import igpp.servlet.SmartHttpServlet;
-import igpp.util.Text;
-import igpp.util.Encode;
-
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
 public class Search
 {
 	private String	mVersion = "1.0.0";

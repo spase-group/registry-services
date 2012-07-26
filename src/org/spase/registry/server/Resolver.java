@@ -310,7 +310,7 @@ public class Resolver extends SmartHttpServlet
 	/**
 	 * Create a URL to match the current options.
 	 *
-	 * URL parameters do not include recusion flags.
+	 * URL parameters do not include recursion flags.
 	 *
 	 * @param id the resource identifier value.
 	 *
@@ -340,7 +340,7 @@ public class Resolver extends SmartHttpServlet
 	 * Load an Authority lookup table.
 	 *
 	 * A table consists of rows composed of
-	 * authority name and file path seperated by whitespace.
+	 * authority name and file path separated by whitespace.
 	 * Lines beginning with "#" are considered comments.
 	 **/
 	public void loadAuthority(String pathname)
@@ -460,7 +460,7 @@ public class Resolver extends SmartHttpServlet
 	/**
 	 * Determine of a resource ID is known.
 	 *
-	 * Performs a quick check for the existance of a resource with the passed ID.
+	 * Performs a quick check for the existence of a resource with the passed ID.
 	 *
 	 * @param id	the identifier of the resource description to retrieve.
 	 **/
@@ -565,7 +565,7 @@ public class Resolver extends SmartHttpServlet
 	}
 
 	/**
-	 * Get the list of granules associated with the given reource ID.
+	 * Get the list of granules associated with the given resource ID.
 	 * which overlap a time interval.
 	 *
 	 * The retrieved information is sent to the output stream and formatted
@@ -573,8 +573,8 @@ public class Resolver extends SmartHttpServlet
 	 * is sent for each matching granule.
 	 *
 	 * @param id	the identifier of the resource description to retrieve.
-	 * @param startDate	the start date of the internval expressed as an ISO-8601 data/time.
-	 * @param stopDate	the stop date of the internval expressed as an ISO-8601 data/time.
+	 * @param startDate	the start date of the interval expressed as an ISO-8601 data/time.
+	 * @param stopDate	the stop date of the interval expressed as an ISO-8601 data/time.
 	 * @param sendURL	if true will send URL of each granule.
 	 * @param sendSize	if true will send size of each granule.
 	 **/
@@ -607,7 +607,7 @@ public class Resolver extends SmartHttpServlet
 			mOut.println("</Response>");
 			return;
 		}
-	   path += ".xml";	// File must have ".xml" extension
+	    path += ".xml";	// File must have ".xml" extension
 		Document doc = XMLGrep.parse(path);
 		ArrayList<Pair> docIndex = XMLGrep.makeIndex(doc, "");
 		ackList = XMLGrep.getValues(docIndex, ".*/Acknowledgement");
@@ -634,7 +634,9 @@ public class Resolver extends SmartHttpServlet
 			ArrayList<ArrayList<String>> granules = new ArrayList<ArrayList<String>>();
 			ArrayList<String> matches = new ArrayList<String>();
 			scanDeepPath(path, matches);
-			if(matches.size() == 0) mOut.println("<Message>No granules are associated with resource.</Message>");
+			if(matches.size() == 0) {
+				mOut.println("<Message>No granules are associated with resource.</Message>");
+			}
 			for(String item : matches) {
 				if(igpp.util.File.isDirectory(item)) continue;	// Skip folders
 				doc = XMLGrep.parse(item);
@@ -745,17 +747,18 @@ public class Resolver extends SmartHttpServlet
 
 		// Translate ID
 
-		String path = translate(id);
+		String path = translate(id);	// Convert to local path
 		if(path == null) {	// Send known authority list
 			mOut.println("<Message>Invalid resource id: " + id + "</Message>");
 		} else {	// Send file lists
+			path = path.replaceAll("@", "");	// Remove "#" for nodes.
 			ArrayList<String> matches = scanPath(path);
 			Collections.sort(matches);
 			for(String name : matches) {
 				File test = new File(name);
 				if(test.isDirectory()) {	// Node
 					mOut.println("<node "
-						+ " id=\"" + igpp.util.Text.concatPath(id, test.getName(), "/") + "\""
+						+ " id=\"" + igpp.util.Text.concatPath(id, "@" + test.getName(), "/") + "\""
 						+ " text=\"" + test.getName() + "\""
 						+ " name=\"" + test.getName() + "\""
 						+ " />");
@@ -799,7 +802,7 @@ public class Resolver extends SmartHttpServlet
 			for(String name : matches) {
 				   if(name.endsWith(mExtension)) { // It's a resource
 				   	String resourcePath = igpp.util.Text.getFileBase(name);
-				   	resourcePath = resourcePath.substring(path.length());	// String filesystem path.
+				   	resourcePath = resourcePath.substring(path.length());	// String file system path.
 						mOut.println("<ResourceID>"
 							+ igpp.util.Text.concatPath(id, resourcePath, "/")
 							+ "</ResourceID>");
@@ -821,9 +824,18 @@ public class Resolver extends SmartHttpServlet
 	{
 		String path = null;
 		if(id == null) return null;
+		
+		id = id.replaceAll("@", "");	// Cleans "Node" mark-up
 
 		Set<String> keyset = mAuthorityMap.keySet();
-		for(String key : keyset) {
+		
+		// Sort so longest keys are first
+		ArrayList<String> keyList = new ArrayList<String>(keyset);
+		Collections.sort(keyList);
+		Collections.reverse(keyList);
+		
+		// Search for substitutions
+		for(String key : keyList) {
 			if(id.startsWith("spase://" + key)) {	// Replace with path
 				path = mAuthorityMap.get(key) + id.substring(8 + key.length());
 				break;
@@ -834,9 +846,9 @@ public class Resolver extends SmartHttpServlet
 	}
 
 	/**
-	 * Recusively determine all named files and folders at a path.
+	 * Recursively determine all named files and folders at a path.
 	 *
-	 * If the path points to a folder, then all subfolders and files
+	 * If the path points to a folder, then all sub-folders and files
 	 * are determined. If the path is to a file, then the filename is returned.
 	 *
 	 * @param path the path to scan.
@@ -866,7 +878,7 @@ public class Resolver extends SmartHttpServlet
 	/**
 	 * Determine all named files and folders at a path.
 	 *
-	 * If the path points to a folder, then all subfolders and files
+	 * If the path points to a folder, then all sub-folders and files
 	 * are determined. If the path is to a file, then the filename is returned.
 	 *
 	 * @param path the path to scan.

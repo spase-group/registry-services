@@ -103,7 +103,7 @@
     <!-- Compile source code -->
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" extdirs="${release.jar}" />
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}" extdirs="${release.jar};./lib" />
     </target>
 
     <!-- Create jar file for classes -->
