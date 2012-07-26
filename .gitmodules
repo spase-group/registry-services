@@ -1,0 +1,3 @@
+[submodule "html"]
+	path = html
+	url = ssh://tking@dev.igpp.ucla.edu/dev1/projects/git/spase/registry-web.git
