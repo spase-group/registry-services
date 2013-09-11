@@ -4,7 +4,7 @@
    See "build.xml" for how each property influences the build.
 -->
 <project name="project-config" basedir="." default="...">
-    <property name="version"        value="1.2.4"/>
+    <property name="version"        value="1.2.5"/>
     <property name="package.title"  value="SPASE Registry"/>
     <property name="package.name" value="spase-registry"/>
     <property name="package.vendor" value="UCLA/IGPP"/>

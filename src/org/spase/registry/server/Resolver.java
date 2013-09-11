@@ -17,12 +17,8 @@
 
 package org.spase.registry.server;
 
-import igpp.servlet.MultiPrinter;
 import igpp.servlet.SmartHttpServlet;
 
-import igpp.util.Date;
-import igpp.util.Encode;
-import igpp.util.Text;
 import igpp.util.StringListComparator;
 
 import igpp.xml.XMLGrep;
@@ -31,7 +27,6 @@ import igpp.xml.Pair;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Collections;
@@ -46,14 +41,11 @@ import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.PrintStream;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -64,10 +56,13 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.PosixParser;
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.ParseException;
 
 public class Resolver extends SmartHttpServlet
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7368719794969123729L;
 	private String	mVersion = "1.0.2";
 	private String mOverview = "Resolver retrieves a resource description for a given resource ID \n"
 									 + "or generates a list of resources at a given partial reosurce ID location.";
@@ -78,12 +73,13 @@ public class Resolver extends SmartHttpServlet
 	String	mRootPath = null;
 	String	mExtension = ".xml";
 	String	mAuthority = null;
-
+	
 	// Task options
 	String	mIdentifier = null;
 	String	mStartDate = null;
 	String	mStopDate = null;
 	String	mHigherAuthority = null;
+	int	mConnect = -1;
 	Boolean	mTree = false;
 	Boolean	mGranules = false;
 	Boolean	mRecursive = false;
@@ -109,6 +105,7 @@ public class Resolver extends SmartHttpServlet
 
 		mAppOptions.addOption( "i", "id", true, "ID. The resource ID to locate." );
 		mAppOptions.addOption( "t", "tree", false, "Tree. Show the items in tree mark-up at given resource ID prefix." );
+		mAppOptions.addOption( "x", "connect", true, "Connect. Show the items in (JSON) connection mark-up at a given resource ID prefix. Walk down the Resource path up to the limit. Use 0 for unlimited. Default: " + mConnect );
 		mAppOptions.addOption( "g", "granules", false, "Granules. Return a list of URLs for Granules associated with the resource. ID" );
 		mAppOptions.addOption( "b", "startdate", true, "Start Date. The start date of the interval of interest." );
 		mAppOptions.addOption( "e", "stopdate", true, "Stop Date. The stop date of the interval of interest." );
@@ -152,6 +149,7 @@ public class Resolver extends SmartHttpServlet
 
 			if(line.hasOption("i")) me.mIdentifier = line.getOptionValue("i");
 			if(line.hasOption("t")) me.mTree = true;
+			if(line.hasOption("x")) me.setConnect(line.getOptionValue("x")); 
 			if(line.hasOption("g")) me.mGranules = true;
 			if(line.hasOption("b")) me.mStartDate = line.getOptionValue("b");
 			if(line.hasOption("e")) me.mStopDate = line.getOptionValue("e");
@@ -265,6 +263,7 @@ public class Resolver extends SmartHttpServlet
 		mURLOnly = false;
 		mCheck = false;
 		mScan = false;
+		mConnect = -1;
 	}
 
 	/**
@@ -281,6 +280,9 @@ public class Resolver extends SmartHttpServlet
 
 		setTree(igpp.util.Text.getValue(request.getParameter("t"), getTree()));
 		setTree(igpp.util.Text.getValue(request.getParameter("tree"), getTree()));
+
+		setConnect(igpp.util.Text.getValue(request.getParameter("x"), getConnect()));
+		setConnect(igpp.util.Text.getValue(request.getParameter("connect"), getConnect()));
 
 		setGranules(igpp.util.Text.getValue(request.getParameter("g"), getGranules()));
 		setGranules(igpp.util.Text.getValue(request.getParameter("granules"), getGranules()));
@@ -322,6 +324,7 @@ public class Resolver extends SmartHttpServlet
 	 	String	param = "";
 
 	 	if(id != null) { param += delim + "i=" + id; delim = "&"; }
+	 	if(mConnect != -1) { param += delim + "x=" + mConnect; delim = "&"; }
 	 	if(mTree) { param += delim + "t=yes"; delim = "&"; }
 	 	if(mGranules) { param += delim + "g=yes"; delim = "&"; }
 	 	if(mStartDate != null) { param += delim + "b=" + mStartDate; delim = "&"; }
@@ -434,6 +437,10 @@ public class Resolver extends SmartHttpServlet
 			return;
 		}
 
+		if(request.getParameter("x") != null) { // Connection
+			response.setContentType("application/json");
+		}
+
 		doAction();
 	}
 
@@ -446,6 +453,7 @@ public class Resolver extends SmartHttpServlet
 	public void doAction()
    	throws Exception
 	{
+		if(mConnect != -1) { getConnect(mIdentifier); return; }
 		if(mTree) { getTreeInfo(mIdentifier); return; }
 		if(mGranules) { getGranules(mIdentifier, mStartDate, mStopDate, mRecursive, mURLOnly, mSizeOnly); return; }
 		if(mIdentifier != null) {
@@ -467,8 +475,6 @@ public class Resolver extends SmartHttpServlet
 	public void checkID(String id)
    	throws Exception
 	{
-		ArrayList<String> processed = new ArrayList<String>();
-
 		mOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
 		String path = translate(id);
@@ -485,8 +491,7 @@ public class Resolver extends SmartHttpServlet
 			}
 		} else {
 			if(mHigherAuthority != null) {	// Pass request on
-				String	buffer = "";
-			   String url = mHigherAuthority + getURLParameters(id);
+ 			    String url = mHigherAuthority + getURLParameters(id);
 				URL urlSource = new URL(url);
 				URLConnection con = urlSource.openConnection();
 				InputStream stream = con.getInputStream();
@@ -545,8 +550,7 @@ public class Resolver extends SmartHttpServlet
 			}
 		} else {
 			if(mHigherAuthority != null) {	// Pass request on
-				String	buffer = "";
-			   String url = mHigherAuthority + getURLParameters(id);
+			    String url = mHigherAuthority + getURLParameters(id);
 				URL urlSource = new URL(url);
 				URLConnection con = urlSource.openConnection();
 				InputStream stream = con.getInputStream();
@@ -598,7 +602,6 @@ public class Resolver extends SmartHttpServlet
 		ArrayList<String> processed = new ArrayList<String>();
 
 		// Granules related to a resource
-		String zipMessage = "";
 		ArrayList<String> ackList = new ArrayList<String>();
 
 		String path = translate(id);
@@ -709,7 +712,7 @@ public class Resolver extends SmartHttpServlet
 				}
 			}
 		}
-			long totalBytes = 0;
+
 		mOut.println("</Response>");
 	}
 
@@ -773,6 +776,198 @@ public class Resolver extends SmartHttpServlet
 		}
 		mOut.println("</Response>");
 	}
+
+	/**
+	 * Get the connection information at the Resource ID location.
+	 * The Resource ID can be a partial ID. All items at that
+	 * location in the path will be returned.
+	 *
+	 * The retrieved information is sent to the output stream and formatted
+	 * as JSON.
+	 *
+	 * @param id	the identifier of the resource description to retrieve.
+	 **/
+	public void getConnect(String id)
+   	throws Exception
+	{
+		mOut.println("{");
+		mOut.println("\"nodes\": [");
+
+		if(id == null || id.equals("spase://")) { 	// Send known authority list
+			String delim = ",";
+			Set<String> keyset = mAuthorityMap.keySet();
+			ArrayList<String> authList = new ArrayList<String>();
+			for(String key : keyset) { authList.add(key); }
+			Collections.sort(authList);
+			for(int i = 0; i < authList.size(); i++) {
+				String key = "";
+				if(i == (authList.size() - 1)) delim = "";
+				key = authList.get(i);
+			    mOut.println("{");
+			    mOut.println("    \"name\": \"" + key + "\",");
+			    mOut.println("    \"type\": \"Authority\",");
+			    mOut.println("    \"id\": \"spase://" + key + "\",");
+		    	mOut.println("    \"links\": [ ");
+		    	mOut.println("       { \"target\": \"spase://\" }");	
+			    mOut.println("   ]");
+			    mOut.println("},");
+			}
+			// Central Node
+		    mOut.println("{");
+		    mOut.println("    \"name\": \"Spase\",");
+		    mOut.println("    \"type\": \"Authority\",");
+		    mOut.println("    \"id\": \"spase://\"");
+		    mOut.println("}");
+			mOut.println("]");	// End of "nodes" array
+			mOut.println("}");	// End of response
+			return;
+		}
+
+		// Translate ID
+		String path = translate(id);	// Convert to local path
+
+		if(path == null) {	// Send known authority list
+			mOut.println("{ \"message\": \"Invalid resource id: " + id + "\"}");
+		} else {	// Send file lists
+			ArrayList<String> idList = new ArrayList<String>();
+			ArrayList<String> refList = new ArrayList<String>();
+			
+			getIDList(id, 0, mConnect, idList);
+	    	idList = igpp.util.Text.uniqueList(idList, true);
+	    	
+	    	for(String myID : idList) {
+			    mOut.println("{");
+			    mOut.println("    \"name\": \"" + igpp.util.Text.getFile(myID) + "\",");
+			    mOut.println("    \"type\": \"" + getResourceType(myID) + "\",");
+		    	mOut.println("    \"id\": \"" + myID + "\",");
+		    	
+		    	mOut.println("    \"links\": [ ");
+		    	
+		    	ArrayList<String> subList = getRefList(myID);
+		    	for(String refID : subList) {
+			    	mOut.println("       { \"target\": \"" + refID + "\" },");			    		
+		    	}
+		    	refList.addAll(subList);
+
+		    	mOut.println("       { \"target\": \"" + getParent(myID) + "\" }");	
+
+			    mOut.println("   ]");
+			    mOut.println("},");
+	    		
+	    	}
+	    	
+	    	// Determine references from start node
+	    	ArrayList<String> subList = getRefList(id);
+	    	
+	    	refList.addAll(subList);
+	    	
+	    	// Determine unique list of references and output nodes
+	    	refList = igpp.util.Text.uniqueList(refList, true);
+	    	refList = igpp.util.Text.complement(refList, idList);
+	    	
+	    	for(String myID : refList) {
+			    mOut.println("{");
+			    mOut.println("    \"name\": \"" +  igpp.util.Text.getFile(myID) + "\",");
+			    mOut.println("    \"type\": \"" + getResourceType(myID) + "\",");
+			    mOut.println("    \"id\": \"" + myID + "\"");
+			    mOut.println("},");	    		
+	    	}
+
+		    // Add start node
+    		String delim = ",";
+    		if(subList.isEmpty()) delim = "";
+		    mOut.println("{");
+		    mOut.println("    \"name\": \"" + igpp.util.Text.getFile(path) + "\",");
+		    mOut.println("    \"type\": \"" + getResourceType(id) + "\",");
+		    mOut.println("    \"id\": \"" + id + "\"" + delim);
+		    if( ! subList.isEmpty()) {
+		    	mOut.println("    \"links\": [ ");
+		    	
+		    	for(int i = 0; i < subList.size(); i++) {
+		    		String refID = subList.get(i);
+		    		delim = ",";
+		    		if(i == subList.size() - 1) delim = "";
+			    	mOut.println("       { \"target\": \"" + refID + "\" }" + delim);			    		
+		    	}
+		    	mOut.println("   ]");	// End of links
+		    }
+		    mOut.println("}");	// End of node
+		}
+		mOut.println("]");	// End of "nodes" array
+		mOut.println("}");	// End of response
+	}
+
+
+	/**
+	 * Get connections from a resource ID
+	 */
+	public Boolean getIDList(String id, int level, int limit, ArrayList<String> idList)
+		   	throws Exception
+	{
+		// Translate ID
+		String path = translate(id);	// Convert to local path
+		if(path == null) return false;	
+		if(level >= limit) return false;
+		
+		ArrayList<String> matches = scanPath(path);
+		for(String name : matches) {
+			File test = new File(name);
+			String selfID = igpp.util.Text.concatPath(id, igpp.util.Text.getFileBase(test.getName()));
+			
+            idList.add(selfID);
+		    if(test.isDirectory() && limit > 0 && level < limit) {	// Go one more level
+		    	getIDList(selfID, level+1, limit, idList);
+		    }
+		}
+		
+		return true;
+	}	
+
+	/**
+	 * Get connections from a resource ID
+	 */
+	public ArrayList<String> getRefList(String id)
+		   	throws Exception
+	{
+		ArrayList<String> refList = new ArrayList<String>();
+		
+		// Translate ID
+		String path = translate(id);	// Convert to local path
+		if(path == null) return refList;	// Unable to resolve
+		
+		path = path + ".xml";
+		File source = new File(path);
+	    if(source.isFile()) {	// Scan references
+		  	refList = igpp.util.Text.uniqueList(scanID(path), true);
+		   	refList.remove(id); // Remove self-reference
+	    }
+		return refList;
+	}
+	
+	/** 
+	 * Scan an XML file and retrieve the content of all tags with a name ending in "ID".
+	 *
+	 * @param path	the path to the file to scan.
+	 */
+	public ArrayList<String> scanID(String path)
+	{
+		ArrayList<Pair> list = new ArrayList<Pair>();
+		ArrayList<String> idList = new ArrayList<String>();
+		
+		try {
+			XMLGrep.makeIndex(list, XMLGrep.parse(path), "");
+			ArrayList<Pair> valueList = XMLGrep.getPairs(list, ".*ID$");
+			
+			for(Pair<String, String> p : valueList) {
+				System.out.println(p.getLeft());
+				if( ! p.getLeft().endsWith("/PriorID")) idList.add((String) p.getRight());	// all but PriorID
+			}
+		} catch(Exception e) {
+			// Do nothing
+		}
+		return idList;
+	}
+	
 
 	/**
 	 * Get the identifiers of every resource starting at a Resource ID location.
@@ -846,6 +1041,65 @@ public class Resolver extends SmartHttpServlet
 	}
 
 	/**
+	 * Extract the authority portion of a SPASE ID.
+	 * The authority is the first node in the ID following the "spase://"
+	 *
+	 * @param id	the identifier of the resource description to translate.
+	 *
+	 * @return the ID of the authority or null if "id" is null.
+	 **/
+	public String getAuthority(String id)
+	{
+		if(id == null) return null;
+		
+		String authority = id.replace("spase://", "");	// remove scheme
+		int n = authority.indexOf('/');
+		if(n != -1) { authority = authority.substring(0, n);  }	// Remove path
+		
+		return authority;
+	}
+
+	/**
+	 * Extract the resource type portion of a SPASE ID.
+	 * The resource type is the second node in the ID following the "spase://"
+	 *
+	 * @param id	the identifier of the resource description to translate.
+	 *
+	 * @return the resource type or "Authority" if the "id" does not include a type.
+	 **/
+	public String getResourceType(String id)
+	{
+		String type = "Authority";
+		if(id == null) return type;
+		
+		String path = id.replace("spase://", "");	// remove scheme
+		String[] parts = path.split("/");
+		if(parts.length > 1) {
+			type = parts[1];
+		}
+	
+		return type;
+	}
+
+	/**
+	 * Extract the parent portion of a SPASE ID.
+	 * The parent portion is the SPASE ID up to the last element.
+	 *
+	 * @param id	the identifier of the resource description to translate.
+	 *
+	 * @return the SPASE ID of the parent or null if "id" is null. 
+	 **/
+	public String getParent(String id)
+	{
+		if(id == null) return null;
+		
+		int n = id.lastIndexOf('/');
+		if(n != -1) { id = id.substring(0, n);  }	// Remove trailing node
+		
+		return id;
+	}
+
+	/**
 	 * Recursively determine all named files and folders at a path.
 	 *
 	 * If the path points to a folder, then all sub-folders and files
@@ -909,7 +1163,7 @@ public class Resolver extends SmartHttpServlet
 		   	if(item != null) matches.add(igpp.util.Text.concatPath(path, item));
 		   }
 	   } else {
-	   	if(filePath.exists()) matches.add(path);
+		   if(filePath.exists()) matches.add(path);
 	   }
 
 	   return matches;
@@ -1088,6 +1342,10 @@ public class Resolver extends SmartHttpServlet
 	public void setTree(String value) { mTree = igpp.util.Text.isTrue(value); }
 	public void setTree(boolean value) { mTree = value; }
 	public Boolean getTree() { return mTree; }
+
+	public void setX(String value) { setConnect(value); }
+	public void setConnect(String value) { mConnect = Integer.parseInt(value); }
+	public String getConnect() { return Integer.toString(mConnect); }
 
 	public void setG(String value) { setGranules(value); }
 	public void setGranules(String value) { mGranules = igpp.util.Text.isTrue(value); }

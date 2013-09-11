@@ -368,6 +368,7 @@ public class Profiler
 			segment = igpp.xml.XMLGrep.makeIndex(doc, "");
 		} catch(Exception e) {
 			System.out.println("Unable to locate: " + descURL);
+			System.out.println("Reason: " + e.getMessage());
 			return;
 		}
 

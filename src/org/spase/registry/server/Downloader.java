@@ -27,7 +27,6 @@ import java.io.IOException;
 
 // Servlet 
 import javax.servlet.ServletException;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,10 +37,13 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.PosixParser;
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.ParseException;
 
 public class Downloader extends SmartHttpServlet
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8064966162023194964L;
 	private String	mVersion = "1.0.0";
 	private String mAcknowledge = "Development funded by NASA's VMO project at UCLA.";
 	private String mOverview = "Obtains a list of URLs associated with a resource by quering \n"
@@ -80,7 +82,6 @@ public class Downloader extends SmartHttpServlet
 	public static void main(String args[])
    {
 		Downloader me = new Downloader();
-		boolean	ready = true;
 		ZipStream	zipStream = new ZipStream();
 
 		me.mOut.setOut(System.out);

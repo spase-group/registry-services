@@ -17,14 +17,9 @@
 
 package org.spase.registry.server;
 
-import igpp.servlet.MultiPrinter;
 import igpp.servlet.SmartHttpServlet;
-import igpp.util.Encode;
-import igpp.util.Text;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -35,24 +30,24 @@ import java.io.BufferedReader;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.StringReader;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 // import org.apache.commons.cli.*;
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.PosixParser;
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.ParseException;
 
 public class Search extends SmartHttpServlet
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String	mVersion = "1.0.0";
 	private String mOverview = "Resolver retrieves a resource description for a given resource ID \n"
 									 + "or generates a list of resources at a given partial reosurce ID location.";
@@ -335,7 +330,6 @@ public class Search extends SmartHttpServlet
 		Set<String> keyset = mAuthorityMap.keySet();
 		for(String key : keyset) {
 			String path = mAuthorityMap.get(key);
-			System.out.println("Scanning: " + path + catPath);
 			ArrayList<String> matchList = search(path + catPath, mWords);
 			if(matchList != null) matches.addAll(matchList);
 		}
@@ -347,7 +341,7 @@ public class Search extends SmartHttpServlet
 		for(String name : matches) {
 			stream(name);
 		}
-   	mOut.println("</Package>");
+   	    mOut.println("</Package>");
 	}
 	
 	
@@ -523,7 +517,6 @@ public class Search extends SmartHttpServlet
 	public void stream(String pathname)
 		throws Exception
 	{
-		boolean on = false;
 		String	buffer;
 		BufferedReader reader = null;
 	
@@ -553,7 +546,6 @@ public class Search extends SmartHttpServlet
 	public String streamToString(String pathname)
 		throws Exception
 	{
-		boolean on = false;
 		String	buffer;
 		BufferedReader reader = null;
 		StringBuffer	content = new StringBuffer();

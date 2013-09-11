@@ -21,8 +21,9 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import org.spase.tools.XMLGrep;
-import org.spase.tools.Pair;
+import igpp.xml.XMLGrep;
+import igpp.xml.Pair;
+
 import org.spase.registry.client.Search;
 
 import org.w3c.dom.Document;
