@@ -17,7 +17,6 @@ package org.spase.registry.server;
 
 import igpp.servlet.MultiPrinter;
 import igpp.servlet.SmartHttpServlet;
-
 import igpp.util.Encode;
 import igpp.util.Text;
 import igpp.util.Process;
@@ -25,7 +24,6 @@ import igpp.util.Process;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Set;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.FileInputStream;
@@ -55,6 +53,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
+
+
 
 
 // import org.apache.commons.cli.*;
@@ -321,7 +321,7 @@ public class Render extends SmartHttpServlet
 		
 		// Fix-up service URLs
 		if(getResolver().indexOf("://") == -1) setResolver(getQualifiedURL(request, getResolver()));
-		if(getRender().indexOf("://") == -1) request.getRequestURI();	// That's me
+		if(getRender().indexOf("://") == -1) setRender(request.getRequestURI());	// That's me
 		
 		// get ready to write response
 		mOut.setOut(response.getWriter());
@@ -354,6 +354,8 @@ public class Render extends SmartHttpServlet
         String stylePath = getRealPath(mRootPath, mStylesheet + ".xsl");
         try {
 	        transformer = igpp.xml.Transform.getTransformer(stylePath, mCache);
+	        // transformer.setParameter("spase.resolver", getResolver());
+	        // transformer.setParameter("spase.render", getRender());
 	        transformer.setParameter("spase.resolver", getResolver());
 	        transformer.setParameter("spase.render", getRender());
         } catch(Exception e) {
@@ -395,8 +397,13 @@ public class Render extends SmartHttpServlet
        mCache = new HashMap(20);
    }
 
+	/** 
+	 * Get a description of an option. Called by SmartHttpServlet when help is requested.
+	 * 
+	 * @param name	option name (long or short)
+	 */
 	public Option getAppOption(String opt) {	return mAppOptions.getOption(opt);	}
-	                
+
 	public void setI(String value) { setIdentifier(value); }
 	public void setIdentifier(String value) { mIdentifier = value; }
 	public String getIdentifier() { return mIdentifier; }

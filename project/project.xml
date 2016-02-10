@@ -3,8 +3,8 @@
    This file is imported by the general purpose buildfile. 
    See "build.xml" for how each property influences the build.
 -->
-<project name="project-config" basedir="." default="...">
-    <property name="version"        value="1.2.5"/>
+<project name="project-config" basedir=".">
+    <property name="version"        value="1.2.7"/>
     <property name="package.title"  value="SPASE Registry"/>
     <property name="package.name" value="spase-registry"/>
     <property name="package.vendor" value="UCLA/IGPP"/>

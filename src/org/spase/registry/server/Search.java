@@ -22,7 +22,6 @@ import igpp.servlet.SmartHttpServlet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -35,6 +34,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
+import org.apache.commons.cli.Option;
 // import org.apache.commons.cli.*;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.CommandLine;
@@ -48,9 +50,10 @@ public class Search extends SmartHttpServlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String	mVersion = "1.0.0";
-	private String mOverview = "Resolver retrieves a resource description for a given resource ID \n"
-									 + "or generates a list of resources at a given partial reosurce ID location.";
+	private String	mVersion = "1.0.1";
+	private String mOverview = "Search retrieves the resource description for resources which contain \n"
+									 + "the search terms. It can search multiple repositories and be \n"
+	 								 + "limited to a category in the repository.";
 	private String mAcknowledge = "Development funded by NASA's VMO project at UCLA.";
 
 	// Service configuration
@@ -63,6 +66,7 @@ public class Search extends SmartHttpServlet
 	boolean	mAllWords = false;
 	ArrayList<String>	mWords = new ArrayList<String>();
 	String	mCategory = null;
+	String	mAuthority = null;
 
 	// Authority map
 	HashMap<String, String> mAuthorityMap = new HashMap<String, String>();
@@ -76,6 +80,7 @@ public class Search extends SmartHttpServlet
 		mAppOptions.addOption( "l", "list", true, "Authority List Table. The path to an authority list table." );
 		
 		mAppOptions.addOption( "a", "all", false, "All. Match all words. Default: " + mAllWords );
+		mAppOptions.addOption( "t", "authority", true, "Authority. Search only the given authority. Default: " + mAuthority );
 		mAppOptions.addOption( "b", "base", true, "Base. Set the base path to resource descriptions. Default: " + mRootPath);
 		mAppOptions.addOption( "x", "extension", true, "Extension. Set the file extension for file names containing resource descriptions. Default: " + mExtension);
 		mAppOptions.addOption( "r", "recursive", false, "Recursive. Retrieve the description for the given resource ID and for all resources referenced in the description." );
@@ -116,6 +121,7 @@ public class Search extends SmartHttpServlet
 			if(line.hasOption("x")) me.setExtension(line.getOptionValue("x"));
 			if(line.hasOption("c")) me.setCategory(line.getOptionValue("c"));
 			if(line.hasOption("w")) me.setWords(line.getOptionValue("w"));
+			if(line.hasOption("t")) me.setAuthority(line.getOptionValue("t"));
 
 			me.doAction();
 		} catch(Exception e) {
@@ -154,7 +160,7 @@ public class Search extends SmartHttpServlet
 	public void sendCapabilities(String title)
    	throws Exception
 	{
-		String param[] = {"help", "all", "category", "word"};
+		String param[] = {"help", "all", "category", "word", "authority"};
 		ArrayList<String> aware = new ArrayList<String>();
 		
 		aware.add(":This service knows about the following authorities:");
@@ -170,7 +176,7 @@ public class Search extends SmartHttpServlet
 	 * Load an Authority lookup table. 
 	 *
 	 * A table consists of rows composed of
-	 * authority name and file path seperated by whitespace. 
+	 * authority name and file path separated by whitespace. 
 	 * Lines beginning with "#" are considered comments.
 	 **/
 	public void loadAuthority(String pathname)
@@ -225,6 +231,7 @@ public class Search extends SmartHttpServlet
 	public void reset()
 	{
 		mWords.clear();	
+		mAuthority = null;
 		mCategory = null;
 		mAllWords = false;
 	}
@@ -242,6 +249,7 @@ public class Search extends SmartHttpServlet
 		setWords(igpp.util.Text.getValue(request.getParameter("words"), ""));
 		setAllWords(igpp.util.Text.getValue(request.getParameter("all"), ""));
 		setCategory(igpp.util.Text.getValue(request.getParameter("category"), null));
+		setAuthority(igpp.util.Text.getValue(request.getParameter("authority"), null));
 	}
 	
    /**
@@ -299,13 +307,14 @@ public class Search extends SmartHttpServlet
 	{
 		setFromRequest(request);
 		
-		// Category overrides 
-		if(igpp.util.Text.isSetMatch(mCategory, "-")) mCategory = null;
+		// Blank conversions 
+		if(igpp.util.Text.isSetMatch(mCategory, "-")) mCategory = null;		
+		if(igpp.util.Text.isSetMatch(mAuthority, "-")) mAuthority = null;
 		
 		// get ready to write response
 		mOut.setOut(response.getWriter());
 
-		if(request.getParameter("h") != null) { // Send self documentation
+		if(request.getParameter("h") != null || request.getParameter("help") != null) { // Send self documentation
 			response.setContentType("text/html");
 			sendCapabilities(request.getRequestURI()); 
 			return; 
@@ -327,9 +336,16 @@ public class Search extends SmartHttpServlet
 		if(mCategory != null) catPath = File.separator + mCategory;
 		ArrayList<String> matches = new ArrayList<String>();
 		
+		System.out.println("Authority: " + mAuthority);
 		Set<String> keyset = mAuthorityMap.keySet();
 		for(String key : keyset) {
+			if(mAuthority == null) {
+				// search all authorities
+			} else {	// Check if desired authority
+				if(! mAuthority.equalsIgnoreCase(key)) continue;
+			}
 			String path = mAuthorityMap.get(key);
+			if(path.contains("/Granule/"))	continue;	// Skip any "Granule" areas
 			ArrayList<String> matchList = search(path + catPath, mWords);
 			if(matchList != null) matches.addAll(matchList);
 		}
@@ -337,11 +353,11 @@ public class Search extends SmartHttpServlet
 		mOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		
 		// Stream files
-		mOut.println("<Package>");
+		mOut.println("<Results>");
 		for(String name : matches) {
 			stream(name);
 		}
-   	    mOut.println("</Package>");
+   	    mOut.println("</Results>");
 	}
 	
 	
@@ -410,7 +426,10 @@ public class Search extends SmartHttpServlet
 	{
 		ArrayList<String> matches = new ArrayList<String>();
 		
+		// System.out.println("Searching: " + path);
 		if(path == null) return matches;
+ 	    File file = new File(path);
+		if( ! file.exists()) return matches;
 				
 		// File name filter
 	   File filePath = new File(path);
@@ -592,7 +611,14 @@ public class Search extends SmartHttpServlet
 			if(reader != null) reader.close();
 		}	
 	}
-	
+
+	/** 
+	 * Get a description of an option. Called by SmartHttpServlet when help is requested.
+	 * 
+	 * @param name	option name (long or short)
+	 */
+	public Option getAppOption(String opt) {	return mAppOptions.getOption(opt);	}
+
 	private void setExtension(String value) { mExtension = value; }
 	
 	public void setBasePath(String value) { mAuthorityMap.put("base", value); }
@@ -602,6 +628,9 @@ public class Search extends SmartHttpServlet
 	
 	public void setCategory(String value) throws Exception { if(igpp.util.Text.isEmpty(value)) return; mCategory = value; }
 	public String getCategory() { return mCategory; }
+	
+	public void setAuthority(String value) throws Exception { if(igpp.util.Text.isEmpty(value)) return; mAuthority = value; }
+	public String getAuthority() { return mAuthority; }
 	
 	public void setAllWords(boolean value) { mAllWords = value; }
 	public void setAllWords(String value) throws Exception { if(igpp.util.Text.isEmpty(value)) return; mAllWords = igpp.util.Text.isTrue(value); }
