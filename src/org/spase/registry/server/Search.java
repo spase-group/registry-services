@@ -353,11 +353,11 @@ public class Search extends SmartHttpServlet
 		mOut.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		
 		// Stream files
-		mOut.println("<Results>");
+		mOut.println("<Package>"); // Keep <Package> tag for backward compatibility
 		for(String name : matches) {
 			stream(name);
 		}
-   	    mOut.println("</Results>");
+   	    mOut.println("</Package>");
 	}
 	
 	
